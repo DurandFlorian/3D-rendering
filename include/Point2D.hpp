@@ -25,6 +25,8 @@ public:
 
     friend Point2D operator*(const Point2D &u, const double t);
 
+    const Point2D& operator=(const Point2D&);
+
     virtual ~Point2D();
 
     double _x = 0;

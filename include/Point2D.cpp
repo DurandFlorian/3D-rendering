@@ -52,6 +52,12 @@ Point2D operator*(const Point2D &u, const double t)
     return Point2D{t * u._x, t * u._y};
 }
 
+const Point2D& Point2D::operator=(const Point2D& p){
+    _x = p._x;
+    _y = p._y;
+    return *this;
+}
+
 Point2D::~Point2D()
 {
 }
