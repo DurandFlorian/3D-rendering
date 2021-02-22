@@ -19,4 +19,6 @@ public:
     double cross_product(const Vector2D &v);
 
     double dot_product(const Vector2D &v);
+
+    Vector2D perpendicular();
 };

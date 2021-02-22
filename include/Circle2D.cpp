@@ -1,4 +1,5 @@
 #include "Circle2D.hpp"
+#include "Ray2D.hpp"
 #include <GL/freeglut.h>
 #include <math.h>
 
@@ -49,4 +50,28 @@ void Circle2D::draw()
             _center->_y + (_radius * sin(i * two_pi / line_amount)));
     }
     glEnd();
+}
+
+bool Circle2D::intersect(Ray2D ray,Point2D& P,Vector2D& N){
+    Vector2D opposite_vector = Vector2D::vector_from_points(ray.get_A(), *_center);
+
+    Vector2D normalized_vector = Vector2D::vector_from_points(ray.get_A(), ray.get_B());
+    normalized_vector.normalize();
+    double t = normalized_vector.dot_product(opposite_vector);
+    if (t < 0.)
+    {
+        return false;
+    }
+    Point2D T = ray.get_A() + t * normalized_vector;
+    double d = (*_center).sqrtDistance(T);
+    double diameter = this->diameter();
+    if (d > diameter)
+    {
+        return false;
+    }
+    double e = t - sqrt(diameter - d);
+    P = ray.get_A() + e * normalized_vector;
+    N = Vector2D::vector_from_points(*_center,P);
+    N.normalize();
+    return true;
 }

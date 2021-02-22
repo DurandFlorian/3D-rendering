@@ -10,7 +10,7 @@ Ray2D::Ray2D(Point2D &A, Point2D &B)
 Ray2D::Ray2D()
 {
 }
-
+/*
 bool Ray2D::intersect(const Ray2D &ray, Point2D &intersection_point)
 {
     Vector2D AB = Vector2D::vector_from_points(*_A, *_B);
@@ -35,6 +35,7 @@ bool Ray2D::intersect(const Ray2D &ray, Point2D &intersection_point)
     return true;
 }
 
+
 bool Ray2D::intersect(const Circle2D &circle, Point2D &intersection_point)
 {
     Vector2D opposite_vector = Vector2D::vector_from_points(*_A, circle.center());
@@ -57,8 +58,9 @@ bool Ray2D::intersect(const Circle2D &circle, Point2D &intersection_point)
     intersection_point = *_A + e * normalized_vector;
     return true;
 }
+*/
 
-bool Ray2D::intersect_canocical_circle(Point2D &intersection_point)
+bool Ray2D::intersect_canocical_circle(Point2D &intersection_point, Vector2D &N)
 {
     Vector2D opposite_vector = Vector2D::vector_from_points(*_A, CANONICAL_CENTER);
     Vector2D normalized_vector = Vector2D::vector_from_points(*_A, *_B);
@@ -76,10 +78,11 @@ bool Ray2D::intersect_canocical_circle(Point2D &intersection_point)
     }
     double e = t - sqrt(1. - d);
     intersection_point = *_A + e * normalized_vector;
+    N = Vector2D::vector_from_points(CANONICAL_CENTER, intersection_point);
     return true;
 }
 
-bool Ray2D::intersect_canocical_square(Point2D &intersection_point)
+bool Ray2D::intersect_canocical_square(Point2D &intersection_point, Vector2D &N)
 {
     Vector2D normalized_vector = Vector2D::vector_from_points(*_A, *_B);
     normalized_vector.normalize();
@@ -107,6 +110,7 @@ bool Ray2D::intersect_canocical_square(Point2D &intersection_point)
         }
         double t = ps1 / ps2;
         intersection_point = *_A + t * normalized_vector;
+        N = square_sides[i];
         if (CANONICAL_CENTER.distance(intersection_point) > SQRT2)
         {
             continue;
@@ -132,6 +136,16 @@ bool Ray2D::projection(const Point2D &point, Point2D &intersection_point)
     }
     intersection_point = *_A + t * AB;
     return true;
+}
+
+Point2D &Ray2D::get_A()
+{
+    return *_A;
+}
+
+Point2D &Ray2D::get_B()
+{
+    return *_B;
 }
 
 void Ray2D::draw()

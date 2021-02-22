@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Point2D.hpp"
+#include "Shape2D.hpp"
 
-class Square2D
+class Square2D : public Shape2D
 {
 
 public:

@@ -42,3 +42,7 @@ double Vector2D::dot_product(const Vector2D &v)
 {
     return _x * v._x + _y * v._y;
 }
+
+Vector2D Vector2D::perpendicular(){
+    return Vector2D{_y,-_x};
+}

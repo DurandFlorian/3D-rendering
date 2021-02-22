@@ -42,6 +42,16 @@ Point2D operator+(const Point2D &u, const Point2D &v)
     return Point2D{u._x + v._x, u._y + v._y};
 }
 
+Point2D operator-(const Point2D &u, const Point2D &v)
+{
+    return Point2D{u._x - v._x, u._y - v._y};
+}
+
+Point2D operator/(const Point2D &u, const double t)
+{
+    return Point2D{u._x/t,  u._y/t};
+}
+
 Point2D operator*(const double t, const Point2D &u)
 {
     return Point2D{t * u._x, t * u._y};

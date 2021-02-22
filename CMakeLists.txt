@@ -16,7 +16,7 @@ find_package(GLUT REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIRS} ${GLUT_INCLUDE_DIR})
 
 set(executables
-    RayProjection
+    CameraIntersectObjects
 )
 
 set(INCLUDE_DIR include)
@@ -41,6 +41,8 @@ foreach(executable ${executables})
         ${INCLUDE_DIR}/Square2D.cpp
         ${INCLUDE_DIR}/GlutLibrary2D.hpp
         ${INCLUDE_DIR}/GlutLibrary2D.cpp
+        ${INCLUDE_DIR}/Camera2D.hpp
+        ${INCLUDE_DIR}/Camera2D.cpp
         )
     target_link_libraries(${executable} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
 endforeach()

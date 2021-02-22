@@ -21,6 +21,10 @@ public:
 
     friend Point2D operator+(const Point2D &u, const Point2D &v);
 
+    friend Point2D operator-(const Point2D &u, const Point2D &v);
+
+    friend Point2D operator/(const Point2D &u, const double t);
+
     friend Point2D operator*(const double t, const Point2D &u);
 
     friend Point2D operator*(const Point2D &u, const double t);

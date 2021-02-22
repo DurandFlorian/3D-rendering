@@ -1,7 +1,11 @@
 #include <iostream>
 #include <GL/freeglut.h>
 #include "../include/Ray2D.hpp"
+#include "../include/Circle2D.hpp"
 #include "../include/GlutLibrary2D.hpp"
+#include "../include/Camera2D.hpp"
+#include "../include/Square2D.hpp"
+#include <vector>
 
 
 using namespace std;
@@ -15,34 +19,37 @@ static int SWIDTH=1920, SHEIGHT= 1080;
 /* limites de la zone reelle associee a la fenetre */
 static double wxmin=-10.,wymin=-10.,wxmax=+10.,wymax=+10.;
 
-Point2D A,B,C,D,Vec;
-Ray2D AB;
-double r;
-Circle2D circle;
-bool flag = false;
+Point2D A,B,C,D;
+
+Camera2D camera;
+double s = 2;
+vector<Shape2D*> objects;
 
 void draw(){
-    AB.draw();
-    circle.draw();
-    if(flag){
-        D.draw();
+    camera.trace_rays(objects);
+    for(auto o:objects){
+        (*o).draw();
     }
 }
 
 void init(){
-    A = Point2D{-5,-5};
-    B = Point2D{5,5};
-    C = Point2D{0,0};
+    A = Point2D{5,5};
+    B = Point2D{0,0};
+    C = Point2D{2,2};
+    D = Point2D{-4,-4};
     addControllablePoint(&A);
     addControllablePoint(&B);
     addControllablePoint(&C);
-    r=4; 
-    AB = Ray2D{A,B};
-    circle = Circle2D{C,r};
+    addControllablePoint(&D);
+    Ray2D ray{A,B};
+    camera = Camera2D{ray,s};
+    Circle2D* c1 = new Circle2D{C,3};
+    Circle2D* c2 = new Circle2D{D,3};
+    objects.emplace_back(c1);
+    objects.emplace_back(c2);
 }
 
 void update(){
-    flag = AB.intersect(circle,D);
 }
 
 void quit(){

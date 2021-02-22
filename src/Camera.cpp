@@ -2,6 +2,7 @@
 #include <GL/freeglut.h>
 #include "../include/Ray2D.hpp"
 #include "../include/GlutLibrary2D.hpp"
+#include "../include/Camera2D.hpp"
 
 
 using namespace std;
@@ -15,34 +16,24 @@ static int SWIDTH=1920, SHEIGHT= 1080;
 /* limites de la zone reelle associee a la fenetre */
 static double wxmin=-10.,wymin=-10.,wxmax=+10.,wymax=+10.;
 
-Point2D A,B,C,D,Vec;
-Ray2D AB;
-double r;
-Circle2D circle;
-bool flag = false;
+Point2D A,B;
+Camera2D camera;
+double s = 2;
 
 void draw(){
-    AB.draw();
-    circle.draw();
-    if(flag){
-        D.draw();
-    }
+    camera.trace_rays();
 }
 
 void init(){
-    A = Point2D{-5,-5};
-    B = Point2D{5,5};
-    C = Point2D{0,0};
+    A = Point2D{5,5};
+    B = Point2D{0,0};
     addControllablePoint(&A);
     addControllablePoint(&B);
-    addControllablePoint(&C);
-    r=4; 
-    AB = Ray2D{A,B};
-    circle = Circle2D{C,r};
+    Ray2D ray{A,B};
+    camera = Camera2D{ray,s};
 }
 
 void update(){
-    flag = AB.intersect(circle,D);
 }
 
 void quit(){
