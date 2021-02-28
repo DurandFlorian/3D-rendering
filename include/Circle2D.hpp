@@ -22,7 +22,7 @@ public :
 
     void draw();
 
-    bool intersect(Ray2D ray,Point2D& P,Vector2D& N);
+    bool intersect(const Ray2D ray,Point2D& P,Vector2D& N) override;
 
 private :
     Point2D* _center;

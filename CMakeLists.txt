@@ -35,8 +35,10 @@ foreach(executable ${executables})
         ${INCLUDE_DIR}/ControllablePoints.cpp
         ${INCLUDE_DIR}/Circle2D.hpp
         ${INCLUDE_DIR}/Circle2D.cpp
-        ${INCLUDE_DIR}/Ray2D.hpp
+        
         ${INCLUDE_DIR}/Ray2D.cpp
+        ${INCLUDE_DIR}/Ray2D.hpp
+        ${INCLUDE_DIR}/Shape2D.hpp
         ${INCLUDE_DIR}/Square2D.hpp
         ${INCLUDE_DIR}/Square2D.cpp
         ${INCLUDE_DIR}/GlutLibrary2D.hpp

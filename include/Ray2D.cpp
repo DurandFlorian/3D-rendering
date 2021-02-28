@@ -1,5 +1,4 @@
 #include "Ray2D.hpp"
-#include <math.h>
 #include <GL/freeglut.h>
 
 Ray2D::Ray2D(Point2D &A, Point2D &B)
@@ -9,6 +8,31 @@ Ray2D::Ray2D(Point2D &A, Point2D &B)
 
 Ray2D::Ray2D()
 {
+}
+
+bool Ray2D::intersect(const Ray2D ray, Point2D &P, Vector2D &N)
+{
+    Vector2D AB = Vector2D::vector_from_points(*_A, *_B);
+    Vector2D CD = Vector2D::vector_from_points(*(ray._A), *(ray._B));
+    Vector2D AC = Vector2D::vector_from_points(*_A,*(ray._A));
+    double v = AB.cross_product(CD);
+    if (fabs(v) < 1e-8) //parallèles
+    {
+        return false;
+    }
+    double t = AC.cross_product(CD)/v;
+    if(t<0.){
+        return false;
+    }
+    double t2 = AC.cross_product(AB)/v;
+    if(t2<0.){
+        return false;
+    }
+    P = *_A + t * AB;
+    N = Vector2D::vector_from_points(*(ray._A),P);
+    N.normalize();
+    return true;
+
 }
 /*
 bool Ray2D::intersect(const Ray2D &ray, Point2D &intersection_point)
@@ -59,7 +83,7 @@ bool Ray2D::intersect(const Circle2D &circle, Point2D &intersection_point)
     return true;
 }
 */
-
+/*
 bool Ray2D::intersect_canocical_circle(Point2D &intersection_point, Vector2D &N)
 {
     Vector2D opposite_vector = Vector2D::vector_from_points(*_A, CANONICAL_CENTER);
@@ -137,13 +161,14 @@ bool Ray2D::projection(const Point2D &point, Point2D &intersection_point)
     intersection_point = *_A + t * AB;
     return true;
 }
+*/
 
-Point2D &Ray2D::get_A()
+Point2D &Ray2D::get_A() const
 {
     return *_A;
 }
 
-Point2D &Ray2D::get_B()
+Point2D &Ray2D::get_B() const
 {
     return *_B;
 }

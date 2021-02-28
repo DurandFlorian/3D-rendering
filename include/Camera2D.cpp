@@ -1,4 +1,5 @@
 #include "Camera2D.hpp"
+#include <math.h>
 
 Camera2D::Camera2D(Ray2D focal, double size)
     : _focal{focal}, _size{size}
@@ -31,14 +32,19 @@ void Camera2D::trace_rays(std::vector<Shape2D*> objects)
         Point2D A = _focal.get_B();
         Point2D B = start + i * gap;
         Vector2D AB = Vector2D::vector_from_points(A,B);
-        B = B + 2* AB;
         Ray2D ray{A,B};
         Vector2D N;
+        Point2D P;
+        double distance = INFINITY;
         for(auto o : objects)
         {
-            if((*o).intersect(ray,B,N))
+            if((*o).intersect(ray,P,N))
             {
-                break;
+                double distance_tmp = P.sqrtDistance(A);
+                if(distance_tmp < distance){
+                    distance = distance_tmp;
+                    B = P;
+                }
             }
         }
         ray.draw();

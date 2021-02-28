@@ -1,6 +1,11 @@
 #pragma once
-#include "Ray2D.hpp"
+#include "Vector2D.hpp"
+#include <math.h>
 
+#define SQRT2 sqrt(2)
+#define CANONICAL_CENTER Point2D{0,0}
+
+class Ray2D;
 
 class Shape2D
 {

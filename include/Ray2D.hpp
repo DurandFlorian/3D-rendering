@@ -1,12 +1,10 @@
 #pragma once
 
+#include "Shape2D.hpp"
 #include "Point2D.hpp"
 #include "Vector2D.hpp"
 
-#define SQRT2 sqrt(2)
-#define CANONICAL_CENTER Point2D{0,0}
-
-class Ray2D
+class Ray2D : public Shape2D
 {
 public:
 
@@ -14,16 +12,19 @@ public:
 
     Ray2D();
     
-   
+    bool intersect(const Ray2D ray,Point2D& P,Vector2D& N);
+
+    /*
     bool intersect_canocical_circle(Point2D &intersection_point,Vector2D& N);
 
     bool intersect_canocical_square(Point2D &intersection_point,Vector2D& N);
 
     bool projection(const Point2D &point, Point2D &intersection_point);
+    */
 
-    Point2D& get_A();
+    Point2D& get_A() const;
 
-    Point2D& get_B();
+    Point2D& get_B() const;
 
     void draw();
 
