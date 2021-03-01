@@ -44,8 +44,11 @@ void init()
     addControllablePoint(&D);
     Ray2D ray{A, B};
     camera = Camera2D{ray, s};
-    Circle2D *c1 = new Circle2D{C, 3};
-    Circle2D *c2 = new Circle2D{D, 3};
+    Circle2D *c1 = new Circle2D;
+    
+    c1->translate(2,0);
+    c1->deform(2,1);
+    c1->rotate(PI/2);
     Point2D *p1 = new Point2D{wxmin, wymin};
     Point2D *p2 = new Point2D{wxmin, wymax};
     Point2D *p3 = new Point2D{wxmax, wymax} ;
@@ -54,14 +57,16 @@ void init()
     Ray2D *r2 = new Ray2D{*p2,*p3};
     Ray2D *r3 = new Ray2D{*p3,*p4};
     Ray2D *r4 = new Ray2D{*p4,*p1};
-    Square2D *square =  new Square2D{CANONICAL_CENTER,2};
+    Square2D * s1 = new Square2D;
+    s1->translate(-3,0);
+    s1->deform(1,2);
+    s1->rotate(PI/2);
+    objects.emplace_back(s1);
     objects.emplace_back(c1);
-    objects.emplace_back(c2);
     objects.emplace_back(r1);
     objects.emplace_back(r2);
     objects.emplace_back(r3);
     objects.emplace_back(r4);
-    objects.emplace_back(square);
 }
 
 void update()

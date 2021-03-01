@@ -10,29 +10,30 @@ Ray2D::Ray2D()
 {
 }
 
-bool Ray2D::intersect(const Ray2D ray, Point2D &P, Vector2D &N)
+bool Ray2D::intersect(const Ray2D ray, Point2D &P, Vector2D &N) 
 {
     Vector2D AB = Vector2D::vector_from_points(*_A, *_B);
     Vector2D CD = Vector2D::vector_from_points(*(ray._A), *(ray._B));
-    Vector2D AC = Vector2D::vector_from_points(*_A,*(ray._A));
+    Vector2D AC = Vector2D::vector_from_points(*_A, *(ray._A));
     double v = AB.cross_product(CD);
     if (fabs(v) < 1e-8) //parallèles
     {
         return false;
     }
-    double t = AC.cross_product(CD)/v;
-    if(t<0.){
+    double t = AC.cross_product(CD) / v;
+    if (t < 0.)
+    {
         return false;
     }
-    double t2 = AC.cross_product(AB)/v;
-    if(t2<0.){
+    double t2 = AC.cross_product(AB) / v;
+    if (t2 < 0.)
+    {
         return false;
     }
     P = *_A + t * AB;
-    N = Vector2D::vector_from_points(*(ray._A),P);
+    N = Vector2D::vector_from_points(*(ray._A), P);
     N.normalize();
     return true;
-
 }
 /*
 bool Ray2D::intersect(const Ray2D &ray, Point2D &intersection_point)

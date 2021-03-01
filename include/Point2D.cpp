@@ -18,7 +18,7 @@ Point2D::Point2D()
 
 void Point2D::draw()
 {
-    Circle2D{*this, 0.1}.draw_filled();
+    
 }
 
 double Point2D::distance(const Point2D &B) const

@@ -35,7 +35,6 @@ foreach(executable ${executables})
         ${INCLUDE_DIR}/ControllablePoints.cpp
         ${INCLUDE_DIR}/Circle2D.hpp
         ${INCLUDE_DIR}/Circle2D.cpp
-        
         ${INCLUDE_DIR}/Ray2D.cpp
         ${INCLUDE_DIR}/Ray2D.hpp
         ${INCLUDE_DIR}/Shape2D.hpp
@@ -45,6 +44,8 @@ foreach(executable ${executables})
         ${INCLUDE_DIR}/GlutLibrary2D.cpp
         ${INCLUDE_DIR}/Camera2D.hpp
         ${INCLUDE_DIR}/Camera2D.cpp
+        ${INCLUDE_DIR}/Matrix2D.hpp
+        ${INCLUDE_DIR}/Matrix2D.cpp
         )
     target_link_libraries(${executable} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
 endforeach()
