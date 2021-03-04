@@ -7,10 +7,11 @@ class Square2D : public Shape2D
 {
 
 public:
+    Square2D(Color color);
 
-    void draw();
+    void draw() const override;
 
-    bool intersect(const Ray2D ray, Point2D &P, Vector2D &N) override;
+    bool intersect(Ray2D& ray, Point2D &P, Vector2D &N) const override;
 
 private:
 };

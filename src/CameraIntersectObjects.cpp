@@ -19,13 +19,13 @@ static int SWIDTH = 1920, SHEIGHT = 1080;
 static double wxmin = -10., wymin = -10., wxmax = +10., wymax = +10.;
 
 Point2D A, B, C, D;
-Camera2D camera;
+Camera2D *camera;
 double s = 2;
 vector<Shape2D *> objects;
 
 void draw()
 {
-    camera.trace_rays(objects);
+    camera->trace_rays(objects);
     for (auto o : objects)
     {
         (*o).draw();
@@ -42,25 +42,23 @@ void init()
     addControllablePoint(&B);
     addControllablePoint(&C);
     addControllablePoint(&D);
-    Ray2D ray{A, B};
-    camera = Camera2D{ray, s};
-    Circle2D *c1 = new Circle2D;
-    
-    c1->translate(2,0);
-    c1->deform(2,1);
-    c1->rotate(PI/2);
+
+    camera = new Camera2D{Ray2D{A, B, Color{0, 1, 0}}, s};
+    Circle2D *c1 = new Circle2D{Color{0, 0, 1}};
+
+    c1->translate(2, 0);
+    c1->deform(2, 1);
+    c1->rotate(PI / 2);
     Point2D *p1 = new Point2D{wxmin, wymin};
     Point2D *p2 = new Point2D{wxmin, wymax};
-    Point2D *p3 = new Point2D{wxmax, wymax} ;
+    Point2D *p3 = new Point2D{wxmax, wymax};
     Point2D *p4 = new Point2D{wxmax, wymin};
-    Ray2D *r1 = new Ray2D{*p1,*p2};
-    Ray2D *r2 = new Ray2D{*p2,*p3};
-    Ray2D *r3 = new Ray2D{*p3,*p4};
-    Ray2D *r4 = new Ray2D{*p4,*p1};
-    Square2D * s1 = new Square2D;
-    s1->translate(-3,0);
-    s1->deform(1,2);
-    s1->rotate(PI/2);
+    Ray2D *r1 = new Ray2D{*p1, *p2, Color{0, 0.2, 0}};
+    Ray2D *r2 = new Ray2D{*p2, *p3, Color{0, 0.2, 0}};
+    Ray2D *r3 = new Ray2D{*p3, *p4, Color{0, 0.2, 0}};
+    Ray2D *r4 = new Ray2D{*p4, *p1, Color{0, 0.2, 0}};
+    Square2D *s1 = new Square2D{Color{1, 1, 0}};
+    s1->translate(-3, 0).deform(1, 2).rotate(PI / 2);
     objects.emplace_back(s1);
     objects.emplace_back(c1);
     objects.emplace_back(r1);

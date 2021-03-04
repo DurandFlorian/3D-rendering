@@ -7,27 +7,23 @@
 class Ray2D : public Shape2D
 {
 public:
-    Ray2D(Point2D &A, Point2D &B);
+    Ray2D(Point2D &, Point2D &,Color);
 
-    Ray2D();
+    Ray2D(const Ray2D&);
 
-    bool intersect(const Ray2D ray, Point2D &P, Vector2D &N) override;
+    bool intersect(Ray2D& ray, Point2D &P, Vector2D &N) const override;
 
-    /*
-    bool intersect_canocical_circle(Point2D &intersection_point,Vector2D& N);
+    const Point2D &get_A() const;
 
-    bool intersect_canocical_square(Point2D &intersection_point,Vector2D& N);
+    const Point2D &get_B() const;
 
-    bool projection(const Point2D &point, Point2D &intersection_point);
-    */
+    void draw() const override;
 
-    Point2D &get_A() const;
+    const Ray2D &operator=(const Ray2D &);
 
-    Point2D &get_B() const;
-
-    void draw();
+    void set_color(const Color&  color);
 
 private:
-    Point2D *_A;
-    Point2D *_B;
+    Point2D &_A;
+    Point2D &_B;
 };

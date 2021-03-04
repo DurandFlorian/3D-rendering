@@ -8,11 +8,11 @@ class Matrix2D
 public:
     Matrix2D();
 
-    Matrix2D(const Matrix2D&);
+    Matrix2D(const Matrix2D &);
 
     Matrix2D operator*(const Matrix2D &);
 
-    Point2D operator*(Point2D &P);
+    const Point2D operator*(const Point2D &) const;
 
     const Matrix2D &operator=(const Matrix2D &);
 

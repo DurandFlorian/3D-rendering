@@ -1,5 +1,6 @@
 #include "Point2D.hpp"
 #include "Circle2D.hpp"
+#include <GL/freeglut.h>
 #include <math.h>
 
 Point2D::Point2D(double x, double y)
@@ -16,9 +17,9 @@ Point2D::Point2D()
 {
 }
 
-void Point2D::draw()
+void Point2D::draw() const
 {
-    
+    glVertex2d(_x, _y);
 }
 
 double Point2D::distance(const Point2D &B) const
@@ -49,7 +50,7 @@ Point2D operator-(const Point2D &u, const Point2D &v)
 
 Point2D operator/(const Point2D &u, const double t)
 {
-    return Point2D{u._x/t,  u._y/t};
+    return Point2D{u._x / t, u._y / t};
 }
 
 Point2D operator*(const double t, const Point2D &u)
@@ -62,7 +63,8 @@ Point2D operator*(const Point2D &u, const double t)
     return Point2D{t * u._x, t * u._y};
 }
 
-const Point2D& Point2D::operator=(const Point2D& p){
+const Point2D &Point2D::operator=(const Point2D &p)
+{
     _x = p._x;
     _y = p._y;
     return *this;

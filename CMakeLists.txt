@@ -46,6 +46,8 @@ foreach(executable ${executables})
         ${INCLUDE_DIR}/Camera2D.cpp
         ${INCLUDE_DIR}/Matrix2D.hpp
         ${INCLUDE_DIR}/Matrix2D.cpp
+        ${INCLUDE_DIR}/Color.hpp
+        ${INCLUDE_DIR}/Color.cpp
         )
     target_link_libraries(${executable} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
 endforeach()

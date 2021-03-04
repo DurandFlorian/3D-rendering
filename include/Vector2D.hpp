@@ -12,13 +12,13 @@ public:
 
     static Vector2D vector_from_points(const Point2D &A, const Point2D &B);
 
-    void normalize();
+    const Vector2D& normalize();
 
     ~Vector2D();
 
-    double cross_product(const Vector2D &v);
+    double cross_product(const Vector2D &v) const;
 
-    double dot_product(const Vector2D &v);
+    double dot_product(const Vector2D &v) const;
 
-    Vector2D perpendicular();
+    Vector2D perpendicular() const;
 };

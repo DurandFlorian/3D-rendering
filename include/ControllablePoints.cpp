@@ -18,10 +18,10 @@ void ControllablePoints::click(const Point2D &B)
         return;
     }
     selected = list.front();
-    auto last_distance = (*selected).distance(B);
+    auto last_distance = selected->sqrtDistance(B);
     for (auto p : list)
     {
-        auto distance = p->distance(B);
+        auto distance = p->sqrtDistance(B);
         if (distance < last_distance)
         {
             selected = p;

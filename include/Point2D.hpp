@@ -11,7 +11,7 @@ public:
 
     Point2D();
 
-    void draw();
+    void draw() const;
 
     double distance(const Point2D &B) const;
 

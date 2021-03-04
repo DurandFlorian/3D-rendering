@@ -18,7 +18,7 @@ void glut2DInit(int argc, char **argv, int WWIDTH, int WHEIGHT, int SWIDTH, int 
     glutInitWindowSize(WWIDTH, WHEIGHT);
     glutInitWindowPosition((SWIDTH - WWIDTH) / 2, (SHEIGHT - WHEIGHT) / 2);
     glutCreateWindow("Glut 2D");
-    glClearColor(1, 1, 1, 1);
+    glClearColor(0, 0, 0, 1);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(wxmin, wxmax, wymin, wymax);

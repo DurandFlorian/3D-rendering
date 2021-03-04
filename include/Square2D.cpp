@@ -2,8 +2,13 @@
 #include "Ray2D.hpp"
 #include <GL/freeglut.h>
 
-void Square2D::draw()
+Square2D::Square2D(Color color) : Shape2D(color)
 {
+}
+
+void Square2D::draw() const
+{
+    _color.set_color();
     Point2D p1{1, 1};
     Point2D p2{1, -1};
     Point2D p3{-1, -1};
@@ -12,21 +17,20 @@ void Square2D::draw()
     p2 = _Md * p2;
     p3 = _Md * p3;
     p4 = _Md * p4;
-    glBegin(GL_LINE_LOOP);
-    glVertex2f(p1._x, p1._y);
-    glVertex2f(p2._x, p2._y);
-    glVertex2f(p3._x, p3._y);
-    glVertex2f(p4._x, p4._y);
+    glBegin(GL_QUADS);
+    p1.draw();
+    p2.draw();
+    p3.draw();
+    p4.draw();
     glEnd();
 }
 
-bool Square2D::intersect(const Ray2D ray, Point2D &P, Vector2D &N)
+bool Square2D::intersect(Ray2D& ray, Point2D &P, Vector2D &N) const
 {
     Point2D A = _Mi * ray.get_A();
     Point2D B = _Mi * ray.get_B();
-    Vector2D AB = Vector2D::vector_from_points(A, B);
-    AB.normalize();
-    static bool flag[4] = {false, false, false, false};
+    Vector2D AB = Vector2D::vector_from_points(A, B).normalize();
+    bool flag[4] = {false, false, false, false};
     static Vector2D square_sides[4] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
     flag[0] = A._x > 1;
     flag[1] = A._x < -1;

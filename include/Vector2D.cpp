@@ -7,14 +7,15 @@ Vector2D::Vector2D(double x, double y)
 }
 
 Vector2D::Vector2D()
-{}
+{
+}
 
 Vector2D Vector2D::vector_from_points(const Point2D &A, const Point2D &B)
 {
     return Vector2D{B._x - A._x, B._y - A._y};
 }
 
-void Vector2D::normalize()
+const Vector2D &Vector2D::normalize()
 {
     double norm = _x * _x + _y * _y;
     if (norm < 1e-8)
@@ -27,22 +28,24 @@ void Vector2D::normalize()
     }
     _x *= norm;
     _y *= norm;
+    return *this;
 }
 
 Vector2D::~Vector2D()
 {
 }
 
-double Vector2D::cross_product(const Vector2D &v)
+double Vector2D::cross_product(const Vector2D &v) const
 {
     return _x * v._y - _y * v._x;
 }
 
-double Vector2D::dot_product(const Vector2D &v)
+double Vector2D::dot_product(const Vector2D &v) const
 {
     return _x * v._x + _y * v._y;
 }
 
-Vector2D Vector2D::perpendicular(){
-    return Vector2D{_y,-_x};
+Vector2D Vector2D::perpendicular() const
+{
+    return Vector2D{_y, -_x};
 }

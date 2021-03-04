@@ -26,7 +26,7 @@ Matrix2D Matrix2D::operator*(const Matrix2D &m)
     return new_matrix;
 }
 
-Point2D Matrix2D::operator*(Point2D &P)
+const Point2D Matrix2D::operator*(const Point2D &P) const
 {
     Point2D N;
     N._x = _matrix[0] * P._x + _matrix[1] * P._y + _matrix[2] * 1;
