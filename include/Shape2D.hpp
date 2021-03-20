@@ -23,7 +23,7 @@ public:
     {
     }
 
-     Shape2D &rotate(double theta)
+    Shape2D &rotate(double theta)
     {
         _Md = Matrix2D::rotation(theta) * _Md;
         _Mi = _Mi * Matrix2D::rotation(-theta);
