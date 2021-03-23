@@ -8,6 +8,7 @@ void (*u)(void) = nullptr;
 
 int width, height;
 double xmax, ymax, xmin, ymin;
+#define SCROLL_SIZE 2.
 
 ScrolBars *scrolBars;
 
@@ -29,7 +30,7 @@ void glut2DInit(int argc, char **argv, int WWIDTH, int WHEIGHT, int SWIDTH, int 
     ymax = wymax;
     xmin = wxmin;
     ymin = wymin;
-    scrolBars = new ScrolBars{Point2D{wxmin, wymin + 2}, Point2D{wxmax, wymin}};
+    scrolBars = new ScrolBars{Point2D{wxmin, wymin + SCROLL_SIZE}, Point2D{wxmax, wymin}};
     init();
     u();
     glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
@@ -102,5 +103,28 @@ void drawSquare(Point2D &position, double size, Color color)
     B.draw();
     C.draw();
     D.draw();
+    glEnd();
+}
+
+void draw_screen(std::vector<Color> screen, int rows, int cols)
+{
+    glBegin(GL_POINTS);
+    double xstep = (xmax - xmin) / width;
+    double ystep = (ymax - (ymin + SCROLL_SIZE)) / height;
+    double istep = ((double)rows) / width;
+    double jstep = ((double)cols) / height;
+    double i = 0;
+    double j = 0;
+    for (double x = xmin; x < xmax; x += xstep)
+    {
+        j = 0;
+        for (double y = (ymin + SCROLL_SIZE); y < ymax; y += ystep)
+        {
+            screen[(int)(i)*cols + j].set_color();
+            glVertex2d(x, y);
+            j += jstep;
+        }
+        i += istep;
+    }
     glEnd();
 }

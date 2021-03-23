@@ -12,4 +12,6 @@ void glut2Dexit(void (*exit)(void));
 
 void addScrollBar(ScrolBar &scrolBar);
 
-void drawSquare(Point2D& positon, double size,Color color);
+void drawSquare(Point2D &positon, double size, Color color);
+
+void draw_screen(std::vector<Color> screen, int rows, int cols);
