@@ -3,6 +3,7 @@
 #include "Shape3D.hpp"
 #include "Point3D.hpp"
 #include "Vector3D.hpp"
+#include <vector>
 
 class Ray3D
 {
@@ -20,6 +21,8 @@ public:
     void set_color(const Color &color);
 
     const Color & get_color() const;
+
+    Color trace(std::vector<Shape3D *> objects, std::vector<Light3D> lights);
 
 private:
     Point3D &_A;

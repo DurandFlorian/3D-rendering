@@ -36,13 +36,13 @@ void init()
     addScrollBar(*rotay);
     addScrollBar(*rotaz);
 
-    Circle3D *c1 = new Circle3D{Color{0, 0, 1}, 0.5, 0.5, 0.5};
-    c1->deform(2, 1, 2);
+    Circle3D *c1 = new Circle3D{Color{0, 0, 1}, 0.5, 0.5, 0.2};
+    /*c1->deform(2, 1, 2);
     Circle3D *c2 = new Circle3D{Color{0, 1, 0}, 0.5, 0.5, 0.5};
-    c2->translate(2, 0, 0);
+    c2->translate(2, 0, 0);*/
 
     objects.emplace_back(c1);
-    objects.emplace_back(c2);
+    //objects.emplace_back(c2);
 
     lights.emplace_back(Light3D{Point3D{4, 4, 4}, Color{1, 1, 1}, 0.1});
 }

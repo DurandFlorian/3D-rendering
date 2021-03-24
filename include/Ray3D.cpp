@@ -36,3 +36,29 @@ const Color &Ray3D::get_color() const
 {
     return _color;
 }
+
+Color Ray3D::trace(std::vector<Shape3D *> objects, std::vector<Light3D> lights)
+{
+
+    double distance = INFINITY;
+    Point3D P;
+    Vector3D N;
+    Color color;
+    for (auto &o : objects)
+    {
+        if (o->intersect(*this, P, N))
+        {
+            double distance_tmp = P.sqrtDistance(_A);
+            if (distance_tmp < distance)
+            {
+                distance = distance_tmp;
+                _B = P;
+                for (auto light : lights)
+                {
+                    color = o->get_color(N, Vector3D::vector_from_points(P, light.position()), light, Vector3D::vector_from_points(_A, _B));
+                }
+            }
+        }
+    }
+    return color;
+}

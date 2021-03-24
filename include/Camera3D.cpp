@@ -35,35 +35,15 @@ void Camera3D::trace_rays(std::vector<Shape3D *> objects, std::vector<Light3D> l
 {
     Point3D A = _Md * Point3D{0, 0, -1};
     double xstep = 2. / _cols;
-    double ystep = 2. / _rows; //TODO voir comment dessiner aux bonne coordonnées
+    double ystep = 2. / _rows;
     std::vector<Color> screen(_rows * _cols);
     for (int x = 0; x < _rows; x++)
     {
         for (int y = 0; y < _cols; y++)
         {
             Point3D B = _Md * Point3D{-1. + x * xstep, -1 + y * ystep, 0.};
-            Vector3D N;
-            Point3D P;
-            Ray3D ray{A, B, Color{0, 0, 0}}; //TODO normalize
-
-            double distance = INFINITY;
-            for (auto &o : objects)
-            {
-                if (o->intersect(ray, P, N))
-                {
-                    double distance_tmp = P.sqrtDistance(A);
-                    if (distance_tmp < distance)
-                    {
-                        distance = distance_tmp;
-                        B = P;
-                        for (auto light : lights)
-                        {
-                            ray.set_color(o->get_color(N, Vector3D::vector_from_points(P, light.position()), light, Vector3D::vector_from_points(ray.get_A(), ray.get_B())));
-                        }
-                    }
-                }
-            }
-            screen[x * _cols + y] = ray.get_color();
+            Ray3D ray{A, B, Color{0, 0, 0}};
+            screen[x * _cols + y] = ray.trace(objects, lights);
         }
     }
     draw_screen(screen, _rows, _cols);

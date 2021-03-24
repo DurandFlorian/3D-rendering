@@ -68,8 +68,9 @@ public:
     {
         w.normalize();
         u.normalize();
-        Vector3D wr = 2 * N.dot_product(w) * N - w;
-        return _spec * _shine * pow((-u).dot_product(wr), 1. / (1. - _shine)) * light.color();
+        double t = N.dot_product(w);
+        Vector3D wr = 2 * t * N - w;
+        return light.ambi() * _color + _diff * t * _color + _spec * _shine * pow((-u).dot_product(wr), 1. / (1. - _shine)) * light.color();
     }
 
 protected:
