@@ -40,8 +40,6 @@ foreach(executable ${executables})
         ${INCLUDE_DIR}/Shape2D.hpp
         ${INCLUDE_DIR}/Square2D.hpp
         ${INCLUDE_DIR}/Square2D.cpp
-        ${INCLUDE_DIR}/GlutLibrary2D.hpp
-        ${INCLUDE_DIR}/GlutLibrary2D.cpp
         ${INCLUDE_DIR}/Camera2D.hpp
         ${INCLUDE_DIR}/Camera2D.cpp
         ${INCLUDE_DIR}/Matrix2D.hpp
@@ -63,6 +61,9 @@ foreach(executable ${executables})
         ${INCLUDE_DIR}/Circle3D.cpp
         ${INCLUDE_DIR}/Camera3D.hpp
         ${INCLUDE_DIR}/Camera3D.cpp
+        ${INCLUDE_DIR}/GlutLibrary3D.hpp
+        ${INCLUDE_DIR}/GlutLibrary3D.cpp
+        ${INCLUDE_DIR}/Light3D.hpp
         )
     target_link_libraries(${executable} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
 endforeach()

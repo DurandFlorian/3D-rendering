@@ -13,6 +13,10 @@ public:
 
     const Color &operator=(const Color &);
 
+    friend Color operator*(double v, const Color &color);
+
+    friend Color operator+(const Color &c1, const Color &c2);
+
 private:
     double _R = 0;
     double _G = 0;

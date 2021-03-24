@@ -20,5 +20,11 @@ public:
 
     double dot_product(const Vector3D &v) const;
 
-    friend Vector3D operator/(const Vector3D &u, const Vector3D& v);
+    friend Vector3D operator/(const Vector3D &u, const Vector3D &v);
+
+    friend Vector3D operator*(double d, const Vector3D &v);
+
+    friend Vector3D operator-(const Vector3D &u, const Vector3D &v);
+
+    Vector3D operator-() const;
 };

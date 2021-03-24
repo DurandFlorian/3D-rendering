@@ -1,4 +1,5 @@
 #include "Matrix3D.hpp"
+
 #include <math.h>
 
 Matrix3D::Matrix3D()
@@ -29,6 +30,15 @@ Matrix3D Matrix3D::operator*(const Matrix3D &m)
 const Point3D Matrix3D::operator*(const Point3D &P) const
 {
     Point3D N;
+    N._x = _matrix[0] * P._x + _matrix[1] * P._y + _matrix[2] * P._z + _matrix[3] * 1;
+    N._y = _matrix[4] * P._x + _matrix[5] * P._y + _matrix[6] * P._z + _matrix[7] * 1;
+    N._z = _matrix[8] * P._x + _matrix[9] * P._y + _matrix[10] * P._z + _matrix[11] * 1;
+    return N;
+}
+
+const Vector3D Matrix3D::operator*(const Vector3D &P) const
+{
+    Vector3D N;
     N._x = _matrix[0] * P._x + _matrix[1] * P._y + _matrix[2] * P._z + _matrix[3] * 1;
     N._y = _matrix[4] * P._x + _matrix[5] * P._y + _matrix[6] * P._z + _matrix[7] * 1;
     N._z = _matrix[8] * P._x + _matrix[9] * P._y + _matrix[10] * P._z + _matrix[11] * 1;

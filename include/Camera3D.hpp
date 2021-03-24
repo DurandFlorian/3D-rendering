@@ -9,7 +9,7 @@ class Camera3D
 public:
     Camera3D(const Point3D &T, double alpha, double beta, double focal, double distance);
 
-    void trace_rays(std::vector<Shape3D *> objects);
+    void trace_rays(std::vector<Shape3D *> objects, std::vector<Light3D> lights);
 
     const Camera3D &operator=(const Camera3D &);
 
@@ -68,6 +68,6 @@ public:
 
 private:
     Matrix3D _Md;
-    static constexpr int _rows = 250;
-    static constexpr int _cols = 250;
+    static constexpr int _rows = 500;
+    static constexpr int _cols = 500;
 };

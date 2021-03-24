@@ -3,7 +3,7 @@
 #include <GL/freeglut.h>
 #include <math.h>
 
-Circle3D::Circle3D(Color color) : Shape3D(color)
+Circle3D::Circle3D(Color color, double diffusion, double spec, double shine) : Shape3D(color, diffusion, spec, shine)
 {
 }
 
@@ -26,7 +26,7 @@ bool Circle3D::intersect(Ray3D &ray, Point3D &P, Vector3D &N) const
     }
     double e = t - sqrt(1. - d);
     P = A + e * normalized_vector;
-    N = Vector3D::vector_from_points(CANONICAL_CENTER, P).normalize();
+    N = _Mn * Vector3D::vector_from_points(CANONICAL_CENTER, P).normalize();
     P = _Md * P;
     return true;
 }

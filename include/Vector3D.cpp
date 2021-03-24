@@ -53,3 +53,26 @@ Vector3D operator/(const Vector3D &u, const Vector3D &v)
 {
     return Vector3D{u._x / v._x, u._y / v._y, u._z / v._z};
 }
+
+Vector3D Vector3D::operator-() const
+{
+    Vector3D v;
+    v._x = -_x;
+    v._y = -_y;
+    v._z = -_z;
+    return v;
+}
+
+Vector3D operator*(double d, const Vector3D &v)
+{
+    Vector3D u;
+    u._x = d * v._x;
+    u._y = d * v._y;
+    u._z = d * v._z;
+    return u;
+}
+
+Vector3D operator-(const Vector3D &u, const Vector3D &v)
+{
+    return Vector3D{u._x - v._x, u._y - v._y, u._z - v._z};
+}

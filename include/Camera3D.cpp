@@ -1,6 +1,6 @@
 #include "Camera3D.hpp"
 #include <math.h>
-#include "GlutLibrary2D.hpp"
+#include "GlutLibrary3D.hpp"
 #include <GL/freeglut.h>
 #include "Circle3D.hpp"
 
@@ -31,7 +31,7 @@ const Camera3D &Camera3D::operator=(const Camera3D &camera)
     return *this;
 }
 
-void Camera3D::trace_rays(std::vector<Shape3D *> objects)
+void Camera3D::trace_rays(std::vector<Shape3D *> objects, std::vector<Light3D> lights)
 {
     Point3D A = _Md * Point3D{0, 0, -1};
     double xstep = 2. / _cols;
@@ -45,6 +45,7 @@ void Camera3D::trace_rays(std::vector<Shape3D *> objects)
             Vector3D N;
             Point3D P;
             Ray3D ray{A, B, Color{0, 0, 0}}; //TODO normalize
+
             double distance = INFINITY;
             for (auto &o : objects)
             {
@@ -55,7 +56,10 @@ void Camera3D::trace_rays(std::vector<Shape3D *> objects)
                     {
                         distance = distance_tmp;
                         B = P;
-                        ray.set_color(o->get_color());
+                        for (auto light : lights)
+                        {
+                            ray.set_color(o->get_color(N, Vector3D::vector_from_points(P, light.position()), light, Vector3D::vector_from_points(ray.get_A(), ray.get_B())));
+                        }
                     }
                 }
             }

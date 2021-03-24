@@ -26,7 +26,7 @@ void Circle2D::draw() const
     glEnd();
 }
 
-bool Circle2D::intersect(Ray2D& ray, Point2D &P, Vector2D &N) const
+bool Circle2D::intersect(Ray2D &ray, Point2D &P, Vector2D &N) const
 {
     Point2D A = _Mi * ray.get_A();
     Point2D B = _Mi * ray.get_B();

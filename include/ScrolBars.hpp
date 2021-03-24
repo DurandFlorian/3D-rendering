@@ -3,6 +3,7 @@
 #include "ScrolBar.hpp"
 #include <GL/freeglut.h>
 #include "Color.hpp"
+#include "GlutLibrary3D.hpp"
 
 class ScrolBars
 {

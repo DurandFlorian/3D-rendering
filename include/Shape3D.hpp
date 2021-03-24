@@ -3,6 +3,7 @@
 #include "Vector3D.hpp"
 #include "Matrix3D.hpp"
 #include "Color.hpp"
+#include "Light3D.hpp"
 #include <math.h>
 
 #define SQRT2 sqrt(2)
@@ -14,7 +15,7 @@ class Ray3D;
 class Shape3D
 {
 public:
-    Shape3D(Color color) : _color{color}
+    Shape3D(Color color, double diffusion, double spec, double shine) : _color{color}, _diff{diffusion}, _spec{spec}, _shine{shine}
     {
     }
 
@@ -63,9 +64,12 @@ public:
 
     virtual bool intersect(Ray3D &ray, Point3D &P, Vector3D &N) const = 0;
 
-    Color get_color() const
+    Color get_color(Vector3D &N, Vector3D w, Light3D light, Vector3D u) const
     {
-        return _color;
+        w.normalize();
+        u.normalize();
+        Vector3D wr = 2 * N.dot_product(w) * N - w;
+        return _spec * _shine * pow((-u).dot_product(wr), 1. / (1. - _shine)) * light.color();
     }
 
 protected:
@@ -73,4 +77,7 @@ protected:
     Matrix3D _Md;
     Matrix3D _Mi;
     Matrix3D _Mn;
+    double _diff;
+    double _spec;
+    double _shine;
 };

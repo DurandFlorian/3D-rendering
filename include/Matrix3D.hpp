@@ -2,6 +2,7 @@
 
 #include <array>
 #include "Point3D.hpp"
+#include "Vector3D.hpp"
 
 class Matrix3D
 {
@@ -13,6 +14,8 @@ public:
     Matrix3D operator*(const Matrix3D &);
 
     const Point3D operator*(const Point3D &) const;
+
+    const Vector3D operator*(const Vector3D &P) const;
 
     const Matrix3D &operator=(const Matrix3D &);
 
