@@ -8,7 +8,9 @@
 class Ray3D
 {
 public:
-    Ray3D(Point3D &, Point3D &, Color);
+    Ray3D(Point3D &, Point3D &);
+
+    Ray3D(Point3D &, Vector3D &);
 
     Ray3D(const Ray3D &);
 
@@ -18,14 +20,9 @@ public:
 
     const Ray3D &operator=(const Ray3D &);
 
-    void set_color(const Color &color);
-
-    const Color & get_color() const;
-
-    Color trace(std::vector<Shape3D *> objects, std::vector<Light3D> lights);
+    Color trace(std::vector<Shape3D *> objects, std::vector<Light3D *> lights, int rec);
 
 private:
-    Point3D &_A;
-    Point3D &_B;
-    Color _color;
+    Point3D _A;
+    Point3D _B;
 };

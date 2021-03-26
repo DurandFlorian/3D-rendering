@@ -35,7 +35,6 @@ public:
         _cursor._x = x;
         _previous_value = _value;
         _value = _min + ((_max - _min) * ((x - xmin) / (xmax - xmin)));
-        std::cout << _value << std::endl;
         function(_value - _previous_value);
     }
 

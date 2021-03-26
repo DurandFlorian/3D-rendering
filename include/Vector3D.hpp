@@ -26,5 +26,7 @@ public:
 
     friend Vector3D operator-(const Vector3D &u, const Vector3D &v);
 
+    friend Vector3D operator+(const Vector3D &u, const Vector3D &v);
+
     Vector3D operator-() const;
 };

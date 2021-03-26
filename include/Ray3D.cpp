@@ -1,12 +1,12 @@
 #include "Ray3D.hpp"
 #include <GL/freeglut.h>
 
-Ray3D::Ray3D(Point3D &A, Point3D &B, Color color)
-    : _A{A}, _B{B}, _color{color}
+Ray3D::Ray3D(Point3D &A, Point3D &B)
+    : _A{A}, _B{B}
 {
 }
 
-Ray3D::Ray3D(const Ray3D &ray) : Ray3D(ray._A, ray._B, ray._color)
+Ray3D::Ray3D(Point3D &A, Vector3D &v) : _A{A}, _B{_A + v}
 {
 }
 
@@ -27,38 +27,48 @@ const Ray3D &Ray3D::operator=(const Ray3D &ray)
     return *this;
 }
 
-void Ray3D::set_color(const Color &color)
+Color Ray3D::trace(std::vector<Shape3D *> objects, std::vector<Light3D *> lights, int rec)
 {
-    _color = color;
-}
-
-const Color &Ray3D::get_color() const
-{
-    return _color;
-}
-
-Color Ray3D::trace(std::vector<Shape3D *> objects, std::vector<Light3D> lights)
-{
-
+    if (rec == 0)
+    {
+        return Color{0, 0, 0};
+    }
     double distance = INFINITY;
     Point3D P;
     Vector3D N;
+    Vector3D Ntmp;
     Color color;
+    Shape3D *current_object = nullptr;
     for (auto &o : objects)
     {
-        if (o->intersect(*this, P, N))
+        if (o->intersect(*this, P, Ntmp))
         {
             double distance_tmp = P.sqrtDistance(_A);
             if (distance_tmp < distance)
             {
                 distance = distance_tmp;
                 _B = P;
-                for (auto light : lights)
-                {
-                    color = o->get_color(N, Vector3D::vector_from_points(P, light.position()), light, Vector3D::vector_from_points(_A, _B));
-                }
+                N = Ntmp;
+                current_object = o;
             }
         }
+    }
+    if (current_object == nullptr)
+    {
+        return color;
+    }
+    for (auto light : lights)
+    {
+        Vector3D u = Vector3D::vector_from_points(_A, _B).normalize();
+        Vector3D w = Vector3D::vector_from_points(_B, light->position()).normalize();
+        N.normalize();
+        Vector3D ur = (-2 * N.dot_product(u) * N + u).normalize();
+        Ray3D Rr{_B, ur}; //TODO revoir ray construction avec un vecteur
+        if (rec == -1)
+        {
+            rec = current_object->get_rec();
+        }
+        color = color + current_object->get_color(N, w, *light, u) + current_object->get_spec() * Rr.trace(objects, lights, rec - 1);
     }
     return color;
 }

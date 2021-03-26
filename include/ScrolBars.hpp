@@ -40,7 +40,6 @@ public:
         for (auto p : list)
         {
             auto distance = p->get_cursor().sqrtDistance(B);
-            std::cout << "distance :" << distance <<" " << p->get_cursor() << B <<std::endl;
             if (distance < last_distance)
             {
                 selected = p;

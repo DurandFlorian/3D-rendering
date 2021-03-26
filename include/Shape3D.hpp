@@ -15,7 +15,7 @@ class Ray3D;
 class Shape3D
 {
 public:
-    Shape3D(Color color, double diffusion, double spec, double shine) : _color{color}, _diff{diffusion}, _spec{spec}, _shine{shine}
+    Shape3D(Color color, double diffusion, double spec, double shine, int rec) : _color{color}, _diff{diffusion}, _spec{spec}, _shine{shine}, _rec{rec}
     {
     }
 
@@ -64,13 +64,21 @@ public:
 
     virtual bool intersect(Ray3D &ray, Point3D &P, Vector3D &N) const = 0;
 
-    Color get_color(Vector3D &N, Vector3D w, Light3D light, Vector3D u) const
+    Color get_color(const Vector3D &N, const Vector3D &w, Light3D light, const Vector3D &u) const
     {
-        w.normalize();
-        u.normalize();
         double t = N.dot_product(w);
         Vector3D wr = 2 * t * N - w;
         return light.ambi() * _color + _diff * t * _color + _spec * _shine * pow((-u).dot_product(wr), 1. / (1. - _shine)) * light.color();
+    }
+
+    double get_spec()
+    {
+        return _spec;
+    }
+
+    int get_rec()
+    {
+        return _rec;
     }
 
 protected:
@@ -81,4 +89,5 @@ protected:
     double _diff;
     double _spec;
     double _shine;
+    int _rec = 1;
 };

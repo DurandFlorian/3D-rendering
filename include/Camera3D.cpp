@@ -31,7 +31,7 @@ const Camera3D &Camera3D::operator=(const Camera3D &camera)
     return *this;
 }
 
-void Camera3D::trace_rays(std::vector<Shape3D *> objects, std::vector<Light3D> lights)
+void Camera3D::trace_rays(std::vector<Shape3D *> objects, std::vector<Light3D *> lights)
 {
     Point3D A = _Md * Point3D{0, 0, -1};
     double xstep = 2. / _cols;
@@ -42,8 +42,8 @@ void Camera3D::trace_rays(std::vector<Shape3D *> objects, std::vector<Light3D> l
         for (int y = 0; y < _cols; y++)
         {
             Point3D B = _Md * Point3D{-1. + x * xstep, -1 + y * ystep, 0.};
-            Ray3D ray{A, B, Color{0, 0, 0}};
-            screen[x * _cols + y] = ray.trace(objects, lights);
+            Ray3D ray{A, B};
+            screen[x * _cols + y] = ray.trace(objects, lights, -1);
         }
     }
     draw_screen(screen, _rows, _cols);

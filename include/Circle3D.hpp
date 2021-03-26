@@ -10,7 +10,7 @@
 class Circle3D : public Shape3D
 {
 public:
-    Circle3D(Color, double diffusion, double spec, double shine);
+    Circle3D(Color, double diffusion, double spec, double shine,int rec);
 
     bool intersect(Ray3D &ray, Point3D &P, Vector3D &N) const override;
 

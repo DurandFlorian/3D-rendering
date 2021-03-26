@@ -3,7 +3,7 @@
 #include <GL/freeglut.h>
 #include <math.h>
 
-Circle3D::Circle3D(Color color, double diffusion, double spec, double shine) : Shape3D(color, diffusion, spec, shine)
+Circle3D::Circle3D(Color color, double diffusion, double spec, double shine, int rec) : Shape3D(color, diffusion, spec, shine, rec)
 {
 }
 

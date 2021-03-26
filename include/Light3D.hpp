@@ -24,6 +24,18 @@ public:
         return _position;
     }
 
+    void rotate_x(double theta){
+        _position = Matrix3D::rotation_x(theta) * _position;
+    }
+
+    void rotate_y(double theta){
+        _position = Matrix3D::rotation_y(theta) * _position;
+    }
+    
+    void rotate_z(double theta){
+        _position = Matrix3D::rotation_z(theta) * _position;
+    }
+
 private:
     Point3D _position;
     Color _color;

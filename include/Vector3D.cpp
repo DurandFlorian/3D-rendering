@@ -76,3 +76,8 @@ Vector3D operator-(const Vector3D &u, const Vector3D &v)
 {
     return Vector3D{u._x - v._x, u._y - v._y, u._z - v._z};
 }
+
+Vector3D operator+(const Vector3D &u, const Vector3D &v)
+{
+    return Vector3D{u._x + v._x, u._y + v._y, u._z + v._z};
+}

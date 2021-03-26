@@ -16,9 +16,10 @@ static int WWIDTH = 512, WHEIGHT = 512;
 static int SWIDTH = 1920, SHEIGHT = 1080;
 
 Camera3D *camera;
+Light3D *light;
 double s = 2;
 vector<Shape3D *> objects;
-vector<Light3D> lights;
+vector<Light3D *> lights;
 
 void draw()
 {
@@ -28,23 +29,41 @@ void draw()
 void init()
 {
     camera = new Camera3D{Point3D{0, 0, 0}, PI, PI, 1, 4};
-
+    light = new Light3D{Point3D{10, 10, 10}, Color{1, 1, 1}, 0.1};
     ScrolBar *rotax = new ScrolBar{0, 2 * PI, [](double theta) { camera->rotate_x(theta); }};
     ScrolBar *rotay = new ScrolBar{0, 2 * PI, [](double theta) { camera->rotate_y(theta); }};
     ScrolBar *rotaz = new ScrolBar{0, 2 * PI, [](double theta) { camera->rotate_z(theta); }};
+    ScrolBar *Lrotax = new ScrolBar{0, 2 * PI, [](double theta) { light->rotate_x(theta); }};
+    ScrolBar *Lrotay = new ScrolBar{0, 2 * PI, [](double theta) { light->rotate_y(theta); }};
+    ScrolBar *Lrotaz = new ScrolBar{0, 2 * PI, [](double theta) { light->rotate_z(theta); }};
     addScrollBar(*rotax);
     addScrollBar(*rotay);
     addScrollBar(*rotaz);
+    addScrollBar(*Lrotax);
+    addScrollBar(*Lrotay);
+    addScrollBar(*Lrotaz);
 
-    Circle3D *c1 = new Circle3D{Color{0, 0, 1}, 0.5, 0.5, 0.2};
-    /*c1->deform(2, 1, 2);
-    Circle3D *c2 = new Circle3D{Color{0, 1, 0}, 0.5, 0.5, 0.5};
-    c2->translate(2, 0, 0);*/
+    Circle3D *c1 = new Circle3D{Color{0, 0, 1}, 1, 1, 0, 5};
+    c1->translate(2, 0, 0);
+    Circle3D *c2 = new Circle3D{Color{0, 1, 1}, 1, 0, 0, 1};
+    c2->translate(-2, 0, 0);
+    Circle3D *c3 = new Circle3D{Color{1, 0, 1}, 1, 0, 0, 1};
+    c3->translate(0, 2, 0);
+    Circle3D *c4 = new Circle3D{Color{1, 1, 0}, 1, 0, 0, 1};
+    c4->translate(0, -2, 0);
+    Circle3D *c5 = new Circle3D{Color{1, 0, 0}, 1, 0, 0, 1};
+    c5->translate(0, 0, 2);
+    Circle3D *c6 = new Circle3D{Color{0, 1, 0}, 1, 0, 0, 1};
+    c6->translate(0, 0, -2);
 
     objects.emplace_back(c1);
-    //objects.emplace_back(c2);
+    objects.emplace_back(c2);
+    objects.emplace_back(c3);
+    objects.emplace_back(c4);
+    objects.emplace_back(c5);
+    objects.emplace_back(c6);
 
-    lights.emplace_back(Light3D{Point3D{4, 4, 4}, Color{1, 1, 1}, 0.1});
+    lights.emplace_back(light);
 }
 
 void update()
