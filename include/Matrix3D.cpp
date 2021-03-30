@@ -36,7 +36,7 @@ const Point3D Matrix3D::operator*(const Point3D &P) const
     return N;
 }
 
-const Vector3D Matrix3D::operator*(const Vector3D &P) const
+Vector3D Matrix3D::operator*(const Vector3D &P) const
 {
     Vector3D N;
     N._x = _matrix[0] * P._x + _matrix[1] * P._y + _matrix[2] * P._z + _matrix[3] * 1;

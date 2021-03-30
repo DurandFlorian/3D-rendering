@@ -37,11 +37,12 @@ void Camera3D::trace_rays(std::vector<Shape3D *> objects, std::vector<Light3D *>
     double xstep = 2. / _cols;
     double ystep = 2. / _rows;
     std::vector<Color> screen(_rows * _cols);
+
     for (int x = 0; x < _rows; x++)
     {
         for (int y = 0; y < _cols; y++)
         {
-            Point3D B = _Md * Point3D{-1. + x * xstep, -1 + y * ystep, 0.};
+            Point3D B = _Md * Point3D{-1. + x * xstep, -1. + y * ystep, 0.};
             Ray3D ray{A, B};
             screen[x * _cols + y] = ray.trace(objects, lights, -1);
         }

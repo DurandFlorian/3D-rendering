@@ -12,13 +12,15 @@ public:
 
     static Vector3D vector_from_points(const Point3D &A, const Point3D &B);
 
-    const Vector3D &normalize();
+    Vector3D &normalize();
 
     ~Vector3D();
 
     Vector3D cross_product(const Vector3D &v) const;
 
     double dot_product(const Vector3D &v) const;
+
+    static Vector3D VctTransmitted(const Vector3D &u, const Vector3D &N, double sigma);
 
     friend Vector3D operator/(const Vector3D &u, const Vector3D &v);
 

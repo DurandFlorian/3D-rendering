@@ -15,17 +15,14 @@ Vector3D Vector3D::vector_from_points(const Point3D &A, const Point3D &B)
     return Vector3D{B._x - A._x, B._y - A._y, B._z - A._z};
 }
 
-const Vector3D &Vector3D::normalize()
+Vector3D &Vector3D::normalize()
 {
-    double norm = _x * _x + _y * _y + _z * _z;
+    double norm = (*this).dot_product(*this);
     if (norm < 1e-8)
     {
-        norm = 1.;
+        return *this;
     }
-    else
-    {
-        norm = 1. / sqrt(norm);
-    }
+    norm = 1. / sqrt(norm);
     _x *= norm;
     _y *= norm;
     _z *= norm;
@@ -80,4 +77,10 @@ Vector3D operator-(const Vector3D &u, const Vector3D &v)
 Vector3D operator+(const Vector3D &u, const Vector3D &v)
 {
     return Vector3D{u._x + v._x, u._y + v._y, u._z + v._z};
+}
+
+Vector3D Vector3D::VctTransmitted(const Vector3D &u, const Vector3D &N, double sigma)
+{
+    auto ps = N.dot_product(u);
+    return (sqrt(1. - sigma * sigma * (1. - ps * ps)) - sigma * ps) * N + sigma * u;
 }

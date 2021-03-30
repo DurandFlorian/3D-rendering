@@ -45,6 +45,6 @@ public:
 
 private:
     Matrix3D _Md;
-    static constexpr int _rows = 250;
-    static constexpr int _cols = 250;
+    static constexpr int _rows = 150;
+    static constexpr int _cols = 150;
 };

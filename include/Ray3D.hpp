@@ -8,9 +8,11 @@
 class Ray3D
 {
 public:
+    Ray3D();
+
     Ray3D(Point3D &, Point3D &);
 
-    Ray3D(Point3D &, Vector3D &);
+    Ray3D(Point3D &A, Vector3D v);
 
     Ray3D(const Ray3D &);
 

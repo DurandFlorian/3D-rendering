@@ -43,18 +43,18 @@ void init()
     addScrollBar(*Lrotay);
     addScrollBar(*Lrotaz);
 
-    Circle3D *c1 = new Circle3D{Color{0, 0, 1}, 1, 1, 0, 5};
-    c1->translate(2, 0, 0);
-    Circle3D *c2 = new Circle3D{Color{0, 1, 1}, 1, 0, 0, 1};
-    c2->translate(-2, 0, 0);
-    Circle3D *c3 = new Circle3D{Color{1, 0, 1}, 1, 0, 0, 1};
-    c3->translate(0, 2, 0);
-    Circle3D *c4 = new Circle3D{Color{1, 1, 0}, 1, 0, 0, 1};
-    c4->translate(0, -2, 0);
-    Circle3D *c5 = new Circle3D{Color{1, 0, 0}, 1, 0, 0, 1};
-    c5->translate(0, 0, 2);
-    Circle3D *c6 = new Circle3D{Color{0, 1, 0}, 1, 0, 0, 1};
-    c6->translate(0, 0, -2);
+    Circle3D *c1 = new Circle3D{Color{0, 0, 1}, 1, 1, 0, 5, 0};
+    c1->translate(3, 0, 0);
+    Circle3D *c2 = new Circle3D{Color{0, 1, 1}, 1, 0, 0, 1, 0};
+    c2->translate(-3, 0, 0);
+    Circle3D *c3 = new Circle3D{Color{1, 0, 1}, 1, 0, 0, 1, 0};
+    c3->translate(0, 3, 0);
+    Circle3D *c4 = new Circle3D{Color{1, 1, 0}, 1, 0, 0, 1, 0};
+    c4->translate(0, -3, 0);
+    Circle3D *c5 = new Circle3D{Color{1, 0, 0}, 1, 0, 0, 1, 0};
+    c5->translate(0, 0, 3);
+    Circle3D *c6 = new Circle3D{Color{0, 0, 0}, 1, 0, 0, 1, 1};
+    c6->translate(0, 0, -3);
 
     objects.emplace_back(c1);
     objects.emplace_back(c2);

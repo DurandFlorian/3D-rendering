@@ -15,7 +15,7 @@ class Ray3D;
 class Shape3D
 {
 public:
-    Shape3D(Color color, double diffusion, double spec, double shine, int rec) : _color{color}, _diff{diffusion}, _spec{spec}, _shine{shine}, _rec{rec}
+    Shape3D(Color color, double diffusion, double spec, double shine, int rec, double alpha) : _color{color}, _diff{diffusion}, _spec{spec}, _shine{shine}, _rec{rec}, _alpha{alpha}
     {
     }
 
@@ -62,7 +62,7 @@ public:
         return *this;
     }
 
-    virtual bool intersect(Ray3D &ray, Point3D &P, Vector3D &N) const = 0;
+    virtual bool intersect(Ray3D &ray, Point3D &P, Vector3D &N, Ray3D &ray_out) const = 0;
 
     Color get_color(const Vector3D &N, const Vector3D &w, Light3D light, const Vector3D &u) const
     {
@@ -81,6 +81,11 @@ public:
         return _rec;
     }
 
+    double get_alpha()
+    {
+        return _alpha;
+    }
+
 protected:
     Color _color;
     Matrix3D _Md;
@@ -90,4 +95,5 @@ protected:
     double _spec;
     double _shine;
     int _rec = 1;
+    double _alpha;
 };
