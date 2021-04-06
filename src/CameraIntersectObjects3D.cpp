@@ -1,5 +1,6 @@
 #include <iostream>
 #include <GL/freeglut.h>
+#include "../include/Point.hpp"
 #include "../include/Ray3D.hpp"
 #include "../include/Circle3D.hpp"
 #include "../include/Camera3D.hpp"

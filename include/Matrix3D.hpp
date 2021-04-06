@@ -1,7 +1,7 @@
 #pragma once
 
 #include <array>
-#include "Point3D.hpp"
+#include "Point.hpp"
 #include "Vector3D.hpp"
 
 class Matrix3D

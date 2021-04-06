@@ -8,18 +8,18 @@
 class ScrolBars
 {
 public:
-    ScrolBars(Point2D up_left, Point2D down_right) : up_left{up_left}, down_right{down_right}, size{up_left._y - down_right._y}
+    ScrolBars(Point2D up_left, Point2D down_right) : up_left{up_left}, down_right{down_right}, size{up_left.y() - down_right.y()}
     {
     }
 
     void add(ScrolBar &scrolbar)
     {
         list.emplace_back(&scrolbar);
-        auto y = up_left._y - (size / list.size() / 2.);
+        auto y = up_left.y() - (size / list.size() / 2.);
         for (uint8_t i = 0; i < list.size(); i++)
         {
-            list[i]->get_cursor()._x = up_left._x;
-            list[i]->get_cursor()._y = y - i * (size / list.size());
+            list[i]->get_cursor().x() = up_left.x();
+            list[i]->get_cursor().y() = y - i * (size / list.size());
         }
     }
 
@@ -52,17 +52,17 @@ public:
     {
         if (selected)
         {
-            if (B._x > up_left._x && B._x < down_right._x)
+            if (B.x() > up_left.x() && B.x() < down_right.x())
             {
-                selected->move(B._x, up_left._x, down_right._x);
+                selected->move(B.x(), up_left.x(), down_right.x());
             }
         }
     }
 
     void draw()
     {
-        Point2D up_right{down_right._x, up_left._y};
-        Point2D down_left{up_left._x, down_right._y};
+        Point2D up_right{down_right.x(), up_left.y()};
+        Point2D down_left{up_left.x(), down_right.y()};
         Color color{1, 1, 1};
         color.set_color();
         glBegin(GL_QUADS);
@@ -76,10 +76,10 @@ public:
         Point2D A, B, C, D;
         for (uint8_t i = 0; i < list.size(); i++)
         {
-            A = Point2D{up_left._x, up_left._y - i * step};
-            B = Point2D{down_right._x, up_left._y - i * step};
-            C = Point2D{down_right._x, up_left._y - (i + 1) * step};
-            D = Point2D{up_left._x, up_left._y - (i + 1) * step};
+            A = Point2D{up_left.x(), up_left.y() - i * step};
+            B = Point2D{down_right.x(), up_left.y() - i * step};
+            C = Point2D{down_right.x(), up_left.y() - (i + 1) * step};
+            D = Point2D{up_left.x(), up_left.y() - (i + 1) * step};
             color.set_color();
             glBegin(GL_QUADS);
             A.draw();

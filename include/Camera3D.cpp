@@ -8,21 +8,21 @@ Camera3D::Camera3D(const Point3D &T, double alpha, double beta, double focal, do
 {
     deform(1., 1., focal);
     rotate_z(-PI / 2);
-    Point3D P{T._x + distance * cos(alpha) * sin(beta), T._y + distance * sin(alpha) * sin(beta), T._z + distance * cos(beta)};
+    Point3D P{T.x() + distance * cos(alpha) * sin(beta), T.y() + distance * sin(alpha) * sin(beta), T.z() + distance * cos(beta)};
     Vector3D u = Vector3D::vector_from_points(P, T);
     u.normalize();
-    double theta = acos(u._z);
+    double theta = acos(u.z());
     rotate_y(theta);
     if (fabs(theta) > 1e-8)
     {
-        double phi = acos(u._x / sin(theta));
-        if (u._y < 0)
+        double phi = acos(u.x() / sin(theta));
+        if (u.y() < 0)
         {
             phi = -phi;
         }
         rotate_z(phi);
     }
-    translate(P._x, P._y, P._z);
+    translate(P.x(), P.y(), P.z());
 }
 
 const Camera3D &Camera3D::operator=(const Camera3D &camera)
@@ -33,7 +33,7 @@ const Camera3D &Camera3D::operator=(const Camera3D &camera)
 
 void Camera3D::trace_rays(std::vector<Shape3D *> objects, std::vector<Light3D *> lights)
 {
-    Point3D A = _Md * Point3D{0, 0, -1};
+    Point3D A = _Md * Point3D{0., 0., -1.};
     double xstep = 2. / _cols;
     double ystep = 2. / _rows;
     std::vector<Color> screen(_rows * _cols);

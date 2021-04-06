@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Point2D.hpp"
+#include "Point.hpp"
 #include <functional>
 
 class ScrolBar
@@ -32,7 +32,7 @@ public:
 
     void move(double x, double xmin, double xmax)
     {
-        _cursor._x = x;
+        _cursor.x() = x;
         _previous_value = _value;
         _value = _min + ((_max - _min) * ((x - xmin) / (xmax - xmin)));
         function(_value - _previous_value);

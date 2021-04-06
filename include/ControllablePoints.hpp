@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "Point2D.hpp"
+#include "Point.hpp"
 
 class ControllablePoints
 {

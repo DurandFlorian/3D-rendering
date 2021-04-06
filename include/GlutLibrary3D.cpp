@@ -1,6 +1,7 @@
 #include "GlutLibrary3D.hpp"
 #include "ScrolBars.hpp"
 #include <GL/freeglut.h>
+#include <iostream>
 
 void (*d)(void) = nullptr;
 void (*u)(void) = nullptr;
@@ -105,10 +106,10 @@ void addScrollBar(ScrolBar &scrolBar)
 void drawSquare(Point2D &position, double size, Color color)
 {
     color.set_color();
-    Point2D A{position._x - size / 2, position._y + size / 2};
-    Point2D B{position._x + size / 2, position._y + size / 2};
-    Point2D C{position._x + size / 2, position._y - size / 2};
-    Point2D D{position._x - size / 2, position._y - size / 2};
+    Point2D A{position.x() - size / 2, position.y() + size / 2};
+    Point2D B{position.x() + size / 2, position.y() + size / 2};
+    Point2D C{position.x() + size / 2, position.y() - size / 2};
+    Point2D D{position.x() - size / 2, position.y() - size / 2};
     glBegin(GL_QUADS);
     A.draw();
     B.draw();

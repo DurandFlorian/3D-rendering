@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Point3D.hpp"
+#include "Point.hpp"
 
 class Vector3D : public Point3D
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Point3D.hpp"
+#include "Point.hpp"
 #include "Shape3D.hpp"
 #include "Ray3D.hpp"
 #include "Matrix3D.hpp"

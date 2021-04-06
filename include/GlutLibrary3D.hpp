@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Point2D.hpp"
+#include "Point.hpp"
 #include "Color.hpp"
 #include "vector"
 
