@@ -11,9 +11,8 @@ bool Circle3D::intersect(Ray3D &ray, Point3D &P, Vector3D &N, Ray3D &ray_out) co
 {
 
     Point3D A = _Mi * ray.get_A();
-    Point3D B = _Mi * ray.get_B();
     Vector3D opposite_vector = Vector3D::vector_from_points(A, CANONICAL_CENTER);
-    Vector3D u = Vector3D::vector_from_points(A, B).normalize();
+    Vector3D u = ray.get_vector().normalize();
     double t = u.dot_product(opposite_vector);
     if (t < 0.)
     {

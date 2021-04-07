@@ -18,7 +18,7 @@ public:
 
     const Point3D &get_A() const;
 
-    const Point3D &get_B() const;
+    Vector3D get_vector() const;
 
     const Ray3D &operator=(const Ray3D &);
 
@@ -26,5 +26,5 @@ public:
 
 private:
     Point3D _A;
-    Point3D _B;
+    Vector3D _v;
 };

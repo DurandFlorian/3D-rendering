@@ -27,8 +27,6 @@ foreach(executable ${executables})
     add_executable(
         ${executable} 
         ${SOURCE_DIR}/${executable}.cpp 
-        ${INCLUDE_DIR}/ControllablePoints.hpp
-        ${INCLUDE_DIR}/ControllablePoints.cpp
         ${INCLUDE_DIR}/Color.hpp
         ${INCLUDE_DIR}/Color.cpp
         ${INCLUDE_DIR}/ScrolBars.hpp

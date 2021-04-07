@@ -4,11 +4,11 @@
 Ray3D::Ray3D() {}
 
 Ray3D::Ray3D(Point3D &A, Point3D &B)
-    : _A{A}, _B{B}
+    : _A{A}, _v{Vector3D::vector_from_points(A,B)}
 {
 }
 
-Ray3D::Ray3D(Point3D &A, Vector3D v) : _A{A}, _B{_A + v}
+Ray3D::Ray3D(Point3D &A, Vector3D v) : _A{A}, _v{v}
 {
 }
 
@@ -17,15 +17,15 @@ const Point3D &Ray3D::get_A() const
     return _A;
 }
 
-const Point3D &Ray3D::get_B() const
+Vector3D Ray3D::get_vector() const
 {
-    return _B;
+    return _v;
 }
 
 const Ray3D &Ray3D::operator=(const Ray3D &ray)
 {
     _A = ray._A;
-    _B = ray._B;
+    _v = ray._v;
     return *this;
 }
 
@@ -37,6 +37,7 @@ Color Ray3D::trace(std::vector<Shape3D *> objects, std::vector<Light3D *> lights
     }
     double distance = INFINITY;
     Point3D P;
+    Point3D B;
     Vector3D N;
     Vector3D Ntmp;
     Ray3D ray_out;
@@ -51,7 +52,7 @@ Color Ray3D::trace(std::vector<Shape3D *> objects, std::vector<Light3D *> lights
             if (distance_tmp < distance)
             {
                 distance = distance_tmp;
-                _B = P;
+                B = P;
                 N = Ntmp;
                 current_object = o;
                 ray_out = ray_out_tmp;
@@ -64,11 +65,11 @@ Color Ray3D::trace(std::vector<Shape3D *> objects, std::vector<Light3D *> lights
     }
     for (auto light : lights)
     {
-        Vector3D u = Vector3D::vector_from_points(_A, _B).normalize();
-        Vector3D w = Vector3D::vector_from_points(_B, light->position()).normalize();
+        Vector3D u = _v.normalize();
+        Vector3D w = Vector3D::vector_from_points(B, light->position()).normalize();
         N.normalize();
         Vector3D ur = (-2 * N.dot_product(u) * N + u).normalize();
-        Ray3D Rr{_B, ur};
+        Ray3D Rr{B, ur};
         if (rec == -1)
         {
             rec = current_object->get_rec();
