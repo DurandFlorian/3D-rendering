@@ -44,13 +44,13 @@ void draw_screen(std::vector<Color> screen, int rows, int cols)
 {
     glBegin(GL_POINTS);
     double istep = ((double)rows) / width;
-    double jstep = ((double)cols) / (height - scroll_size);
+    double jstep = ((double)cols) / (height- scroll_size);
     double i = 0;
     double j = 0;
     for (int x = 0; x < width; x++)
     {
         j = 0;
-        for (int y = 0; y < height - scroll_size; y++)
+        for (int y = 0; y < height- scroll_size; y++)
         {
             screen[(int)(i)*cols + j].set_color();
             glVertex2i(x, y);
@@ -98,18 +98,18 @@ void glut3Dexit(void (*quit)(void))
     std::cout << "Exit" << std::endl;
 }
 
-void addScrollBar(ScrolBar &scrolBar)
+void addScrollBar(ScrolBar scrolBar)
 {
     scrolBars->add(scrolBar);
 }
 
-void drawSquare(Point2D &position, double size, Color color)
+void drawRectangle(Point2D position, double w,double h, Color color)
 {
     color.set_color();
-    Point2D A{position.x() - size / 2, position.y() + size / 2};
-    Point2D B{position.x() + size / 2, position.y() + size / 2};
-    Point2D C{position.x() + size / 2, position.y() - size / 2};
-    Point2D D{position.x() - size / 2, position.y() - size / 2};
+    Point2D A{position.x() - w / 2, position.y() + h / 2};
+    Point2D B{position.x() + w / 2, position.y() + h / 2};
+    Point2D C{position.x() + w / 2, position.y() - h / 2};
+    Point2D D{position.x() - w / 2, position.y() - h / 2};
     glBegin(GL_QUADS);
     A.draw();
     B.draw();

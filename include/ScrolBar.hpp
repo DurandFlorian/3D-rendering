@@ -6,7 +6,7 @@
 class ScrolBar
 {
 public:
-    ScrolBar(double min, double max, std::function<void(double)> function) : _min{min}, _max{max}, _value{min}, function{function}
+    ScrolBar(double min, double max,Color color, std::function<void(double)> function) : _min{min}, _max{max}, _value{min},_color{color}, function{function}
     {
     }
 
@@ -30,6 +30,10 @@ public:
         return _cursor;
     }
 
+    Color& get_color(){
+        return _color;
+    }
+
     void move(double x, double xmin, double xmax)
     {
         _cursor.x() = x;
@@ -43,6 +47,7 @@ private:
     double _max;
     double _value;
     double _previous_value;
+    Color _color;
     Point2D _cursor;
     std::function<void(double)> function;
 };

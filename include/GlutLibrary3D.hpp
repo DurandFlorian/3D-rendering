@@ -20,6 +20,6 @@ void glut3Ddraw(void (*draw)(void));
 
 void glut3Dexit(void (*quit)(void));
 
-void addScrollBar(ScrolBar &scrolBar);
+void addScrollBar(ScrolBar scrolBar);
 
-void drawSquare(Point2D &position, double size, Color color);
+void drawRectangle(Point2D position,  double w,double h, Color color);

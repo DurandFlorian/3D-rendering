@@ -29,21 +29,16 @@ void draw()
 
 void init()
 {
-    camera = new Camera3D{Point3D{0, 0, 0}, PI, PI, 1, 4};
+    camera = new Camera3D{Point3D{0, 0, 0}, PI, PI, 1, 1};
     light = new Light3D{Point3D{10, 10, 10}, Color{1, 1, 1}, 0.1};
-    ScrolBar *rotax = new ScrolBar{0, 2 * PI, [](double theta) { camera->rotate_x(theta); }};
-    ScrolBar *rotay = new ScrolBar{0, 2 * PI, [](double theta) { camera->rotate_y(theta); }};
-    ScrolBar *rotaz = new ScrolBar{0, 2 * PI, [](double theta) { camera->rotate_z(theta); }};
-    ScrolBar *Lrotax = new ScrolBar{0, 2 * PI, [](double theta) { light->rotate_x(theta); }};
-    ScrolBar *Lrotay = new ScrolBar{0, 2 * PI, [](double theta) { light->rotate_y(theta); }};
-    ScrolBar *Lrotaz = new ScrolBar{0, 2 * PI, [](double theta) { light->rotate_z(theta); }};
-    addScrollBar(*rotax);
-    addScrollBar(*rotay);
-    addScrollBar(*rotaz);
-    addScrollBar(*Lrotax);
-    addScrollBar(*Lrotay);
-    addScrollBar(*Lrotaz);
-
+    addScrollBar({0, 2 * PI,Color{1,0,0}, [](double theta) { camera->rotate_x(theta); }});
+    addScrollBar({0, 2 * PI,Color{1,0,0}, [](double theta) { camera->rotate_y(theta); }});
+    addScrollBar({0, 2 * PI, Color{1,0,0},[](double theta) { camera->rotate_z(theta); }});
+    addScrollBar({1, 5,Color{1,0,0}, [](double distance) { camera->zoom(distance); }});
+    addScrollBar({0, 2 * PI,Color{0,1,0}, [](double theta) { light->rotate_x(theta); }});
+    addScrollBar({0, 2 * PI,Color{0,1,0}, [](double theta) { light->rotate_y(theta); }});
+    addScrollBar({0, 2 * PI,Color{0,1,0}, [](double theta) { light->rotate_z(theta); }});
+    
     Circle3D *c1 = new Circle3D{Color{0, 0, 1}, 1, 1, 0, 5, 0};
     c1->translate(3, 0, 0);
     Circle3D *c2 = new Circle3D{Color{0, 1, 1}, 1, 0, 0, 1, 0};
