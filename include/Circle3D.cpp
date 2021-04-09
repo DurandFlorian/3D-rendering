@@ -29,7 +29,7 @@ bool Circle3D::intersect(Ray3D &ray, Point3D &P, Vector3D &N, Ray3D &ray_out) co
     N = Vector3D::vector_from_points(CANONICAL_CENTER, P).normalize();
     if (_alpha > 0.)
     {
-        Vector3D ut = Vector3D::VctTransmitted(-u, N, 1. / 1.49).normalize();
+        Vector3D ut = Vector3D::VctTransmitted(-u, N, 1. / indice).normalize();
         Vector3D AC = Vector3D::vector_from_points(P, CANONICAL_CENTER);
         double t = ut.dot_product(AC);
         T = P + t * ut;
@@ -38,7 +38,7 @@ bool Circle3D::intersect(Ray3D &ray, Point3D &P, Vector3D &N, Ray3D &ray_out) co
         Point3D J = P + e * ut;
         Vector3D Nj = Vector3D::vector_from_points(CANONICAL_CENTER, J).normalize();
         J = _Md * J;
-        ray_out = Ray3D{J, (_Mn * Vector3D::VctTransmitted(-ut, Nj, 1.49 / 1.)).normalize()};
+        ray_out = Ray3D{J, (_Mn * Vector3D::VctTransmitted(-ut, Nj, indice / 1.)).normalize()};
     }
     N = (_Mn * N).normalize();
     P = _Md * P;

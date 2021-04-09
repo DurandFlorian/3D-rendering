@@ -63,9 +63,9 @@ Color Ray3D::trace(std::vector<Shape3D *> objects, std::vector<Light3D *> lights
     {
         return color;
     }
+    Vector3D u = _v.normalize();
     for (auto light : lights)
     {
-        Vector3D u = _v.normalize();
         Vector3D w = Vector3D::vector_from_points(B, light->position()).normalize();
         N.normalize();
         Vector3D ur = (-2 * N.dot_product(u) * N + u).normalize();

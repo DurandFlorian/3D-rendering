@@ -43,9 +43,10 @@ public:
         return *this;
     }
 
-    Camera3D& zoom(double d){
-        Point3D P = (_Md * CANONICAL_CENTER)*d;
-        translate(P.x(),P.y(),P.z());
+    Camera3D &zoom(double d)
+    {
+        Point3D P = (_Md * CANONICAL_CENTER) * d;
+        translate(P.x(), P.y(), P.z());
         return *this;
     }
 

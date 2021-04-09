@@ -40,6 +40,8 @@ foreach(executable ${executables})
         ${INCLUDE_DIR}/Ray3D.hpp
         ${INCLUDE_DIR}/Circle3D.hpp
         ${INCLUDE_DIR}/Circle3D.cpp
+        ${INCLUDE_DIR}/Square3D.hpp
+        ${INCLUDE_DIR}/Square3D.cpp
         ${INCLUDE_DIR}/Camera3D.hpp
         ${INCLUDE_DIR}/Camera3D.cpp
         ${INCLUDE_DIR}/GlutLibrary3D.hpp

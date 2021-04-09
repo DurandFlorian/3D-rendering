@@ -6,7 +6,7 @@
 #include <numeric>
 #include <math.h>
 
-template<typename T,u_char dimension>
+template<typename T,unsigned char dimension>
 class Point
 {
 private :

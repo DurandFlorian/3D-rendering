@@ -6,7 +6,6 @@
 #include "Light3D.hpp"
 #include <math.h>
 
-#define SQRT2 sqrt(2)
 #define CANONICAL_CENTER \
     Point3D { 0, 0, 0 }
 
@@ -96,4 +95,5 @@ protected:
     double _shine;
     int _rec = 1;
     double _alpha;
+    static constexpr double indice = 1.01;
 };

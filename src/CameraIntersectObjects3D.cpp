@@ -3,6 +3,7 @@
 #include "../include/Point.hpp"
 #include "../include/Ray3D.hpp"
 #include "../include/Circle3D.hpp"
+#include "../include/Square3D.hpp"
 #include "../include/Camera3D.hpp"
 #include "../include/ScrolBars.hpp"
 #include "../include/GlutLibrary3D.hpp"
@@ -29,16 +30,16 @@ void draw()
 
 void init()
 {
-    camera = new Camera3D{Point3D{0, 0, 0}, PI, PI, 1, 1};
+    camera = new Camera3D{Point3D{0, 0, 0}, 0, 0, 1, 5};
     light = new Light3D{Point3D{10, 10, 10}, Color{1, 1, 1}, 0.1};
-    addScrollBar({0, 2 * PI,Color{1,0,0}, [](double theta) { camera->rotate_x(theta); }});
-    addScrollBar({0, 2 * PI,Color{1,0,0}, [](double theta) { camera->rotate_y(theta); }});
-    addScrollBar({0, 2 * PI, Color{1,0,0},[](double theta) { camera->rotate_z(theta); }});
-    addScrollBar({1, 5,Color{1,0,0}, [](double distance) { camera->zoom(distance); }});
-    addScrollBar({0, 2 * PI,Color{0,1,0}, [](double theta) { light->rotate_x(theta); }});
-    addScrollBar({0, 2 * PI,Color{0,1,0}, [](double theta) { light->rotate_y(theta); }});
-    addScrollBar({0, 2 * PI,Color{0,1,0}, [](double theta) { light->rotate_z(theta); }});
-    
+    addScrollBar({0, 2 * PI, Color{1, 0, 0}, [](double theta) { camera->rotate_x(theta); }});
+    addScrollBar({0, 2 * PI, Color{1, 0, 0}, [](double theta) { camera->rotate_y(theta); }});
+    addScrollBar({0, 2 * PI, Color{1, 0, 0}, [](double theta) { camera->rotate_z(theta); }});
+    addScrollBar({1, 5, Color{1, 0, 0}, [](double distance) { camera->zoom(distance); }});
+    addScrollBar({0, 2 * PI, Color{0, 1, 0}, [](double theta) { light->rotate_x(theta); }});
+    addScrollBar({0, 2 * PI, Color{0, 1, 0}, [](double theta) { light->rotate_y(theta); }});
+    addScrollBar({0, 2 * PI, Color{0, 1, 0}, [](double theta) { light->rotate_z(theta); }});
+
     Circle3D *c1 = new Circle3D{Color{0, 0, 1}, 1, 1, 0, 5, 0};
     c1->translate(3, 0, 0);
     Circle3D *c2 = new Circle3D{Color{0, 1, 1}, 1, 0, 0, 1, 0};
@@ -49,15 +50,18 @@ void init()
     c4->translate(0, -3, 0);
     Circle3D *c5 = new Circle3D{Color{1, 0, 0}, 1, 0, 0, 1, 0};
     c5->translate(0, 0, 3);
+    
     Circle3D *c6 = new Circle3D{Color{0, 0, 0}, 1, 0, 0, 1, 1};
     c6->translate(0, 0, -3);
-
+    Square3D *s1 = new Square3D{Color{0, 0, 0}, 1, 0, 0, 1, 1};
+    
     objects.emplace_back(c1);
     objects.emplace_back(c2);
     objects.emplace_back(c3);
     objects.emplace_back(c4);
     objects.emplace_back(c5);
-    objects.emplace_back(c6);
+    //objects.emplace_back(c6);
+    objects.emplace_back(s1);
 
     lights.emplace_back(light);
 }
