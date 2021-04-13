@@ -4,7 +4,7 @@
 Ray3D::Ray3D() {}
 
 Ray3D::Ray3D(Point3D &A, Point3D &B)
-    : _A{A}, _v{Vector3D::vector_from_points(A,B)}
+    : _A{A}, _v{Vector3D::vector_from_points(A, B)}
 {
 }
 
@@ -63,21 +63,20 @@ Color Ray3D::trace(std::vector<Shape3D *> objects, std::vector<Light3D *> lights
     {
         return color;
     }
-    Vector3D u = _v.normalize();
+    Vector3D u = _v;
     for (auto light : lights)
     {
         Vector3D w = Vector3D::vector_from_points(B, light->position()).normalize();
-        N.normalize();
-        Vector3D ur = (-2 * N.dot_product(u) * N + u).normalize();
-        Ray3D Rr{B, ur};
-        if (rec == -1)
+        color += current_object->get_color(N, w, *light, u);
+        if (current_object->get_spec() > 0.)
         {
-            rec = current_object->get_rec();
+            Vector3D ur = (-2 * N.dot_product(u) * N + u);
+            Ray3D Rr{B, ur};
+            color += current_object->get_spec() * Rr.trace(objects, lights, rec - 1);
         }
-        color = color + current_object->get_color(N, w, *light, u) + current_object->get_spec() * Rr.trace(objects, lights, rec - 1);
         if (current_object->get_alpha() > 0.)
         {
-            color = color + current_object->get_alpha() * ray_out.trace(objects, lights, -1);
+            color += current_object->get_alpha() * ray_out.trace(objects, lights, rec);
         }
     }
     return color;

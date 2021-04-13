@@ -4,7 +4,7 @@
 #include <math.h>
 #include <iostream>
 
-Square3D::Square3D(Color color, double diffusion, double spec, double shine, int rec, double alpha) : Shape3D(color, diffusion, spec, shine, rec, alpha)
+Square3D::Square3D(Color color, double diffusion, double spec, double shine, double alpha) : Shape3D(color, diffusion, spec, shine, alpha)
 {
 }
 
@@ -45,7 +45,7 @@ bool Square3D::intersect(Ray3D &ray, Point3D &P, Vector3D &N, Ray3D &ray_out) co
         N = square_sides[i];
         if (_alpha > 0.)
         {
-            Vector3D ut = Vector3D::VctTransmitted(-u, N, 1. / indice).normalize();
+            Vector3D ut = Vector3D::VctTransmitted(-u, N, 1. / indice);
             for (int j = 0; j < 6; j++)
             {
                 double ps1 = Vector3D::vector_from_points(P, square_sides[j]).dot_product(square_sides[j]);
@@ -63,7 +63,7 @@ bool Square3D::intersect(Ray3D &ray, Point3D &P, Vector3D &N, Ray3D &ray_out) co
                 }
                 Vector3D Nj = square_sides[j];
                 J = _Md * J;
-                ray_out = Ray3D{J, (_Mn * Vector3D::VctTransmitted(-ut, Nj, indice / 1.)).normalize()};
+                ray_out = Ray3D{J, (_Mn * Vector3D::VctTransmitted(-ut, Nj, indice / 1.))};
                 break;
             }
         }

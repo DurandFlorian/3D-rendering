@@ -3,6 +3,7 @@
 #include "Ray3D.hpp"
 #include "Shape3D.hpp"
 #include <vector>
+#include <iostream>
 
 class Camera3D
 {
@@ -45,13 +46,30 @@ public:
 
     Camera3D &zoom(double d)
     {
-        Point3D P = (_Md * CANONICAL_CENTER) * d;
-        translate(P.x(), P.y(), P.z());
+        Point3D B = (_Md * CANONICAL_CENTER);
+        Point3D A = (_Md * Point3D{0, 0, -1});
+        Vector3D v = Vector3D::vector_from_points(A, B).normalize();
+        Point3D C = v * d;
+        translate(C.x(), C.y(), C.z());
+        return *this;
+    }
+
+    Camera3D &recursion(double d)
+    {
+        rec += d;
+        return *this;
+    }
+
+    Camera3D &rows_and_columns(double d)
+    {
+        _rows += d;
+        _cols += d;
         return *this;
     }
 
 private:
     Matrix3D _Md;
-    static constexpr int _rows = 150;
-    static constexpr int _cols = 150;
+    double _rows = 10;
+    double _cols = 10;
+    double rec = 1.;
 };

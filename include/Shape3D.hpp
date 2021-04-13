@@ -14,7 +14,7 @@ class Ray3D;
 class Shape3D
 {
 public:
-    Shape3D(Color color, double diffusion, double spec, double shine, int rec, double alpha) : _color{color}, _diff{diffusion}, _spec{spec}, _shine{shine}, _rec{rec}, _alpha{alpha}
+    Shape3D(Color color, double diffusion, double spec, double shine, double alpha) : _color{color}, _diff{diffusion}, _spec{spec}, _shine{shine}, _alpha{alpha}
     {
     }
 
@@ -65,19 +65,23 @@ public:
 
     Color get_color(const Vector3D &N, const Vector3D &w, Light3D light, const Vector3D &u) const
     {
-        double t = N.dot_product(w);
-        Vector3D wr = 2 * t * N - w;
-        return light.ambi() * _color + _diff * t * _color + _spec * _shine * pow((-u).dot_product(wr), 1. / (1. - _shine)) * light.color();
+        Color color = light.ambi() * _color;
+        if (_diff > 0.)
+        {
+            double t = N.dot_product(w);
+            color += _diff * t * _color;
+            if (_spec > 0. && _shine > 0.)
+            {
+                Vector3D wr = 2 * t * N - w;
+                color += _spec * _shine * pow((-u).dot_product(wr), 1. / (1. - _shine)) * light.color();
+            }
+        }
+        return color;
     }
 
     double get_spec()
     {
         return _spec;
-    }
-
-    int get_rec()
-    {
-        return _rec;
     }
 
     double get_alpha()
@@ -93,7 +97,6 @@ protected:
     double _diff;
     double _spec;
     double _shine;
-    int _rec = 1;
     double _alpha;
     static constexpr double indice = 1.01;
 };

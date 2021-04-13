@@ -43,3 +43,11 @@ Color operator+(const Color &c1, const Color &c2)
     new_color._B = c1._B + c2._B;
     return new_color;
 }
+
+
+Color& Color::operator+=(const Color &c){
+    _R += c._R;
+    _G += c._G;
+    _B += c._B;
+    return *this;
+}

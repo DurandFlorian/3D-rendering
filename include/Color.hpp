@@ -17,6 +17,8 @@ public:
 
     friend Color operator+(const Color &c1, const Color &c2);
 
+    Color& operator+=(const Color &c);
+
 private:
     double _R = 0;
     double _G = 0;

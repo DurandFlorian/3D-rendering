@@ -3,7 +3,7 @@
 #include <GL/freeglut.h>
 #include <math.h>
 
-Circle3D::Circle3D(Color color, double diffusion, double spec, double shine, int rec, double alpha) : Shape3D(color, diffusion, spec, shine, rec, alpha)
+Circle3D::Circle3D(Color color, double diffusion, double spec, double shine, double alpha) : Shape3D(color, diffusion, spec, shine, alpha)
 {
 }
 
@@ -26,21 +26,21 @@ bool Circle3D::intersect(Ray3D &ray, Point3D &P, Vector3D &N, Ray3D &ray_out) co
     }
     double e = t - sqrt(1. - d);
     P = A + e * u;
-    N = Vector3D::vector_from_points(CANONICAL_CENTER, P).normalize();
+    N = Vector3D::vector_from_points(CANONICAL_CENTER, P);
     if (_alpha > 0.)
     {
-        Vector3D ut = Vector3D::VctTransmitted(-u, N, 1. / indice).normalize();
+        Vector3D ut = Vector3D::VctTransmitted(-u, N, 1. / indice);
         Vector3D AC = Vector3D::vector_from_points(P, CANONICAL_CENTER);
         double t = ut.dot_product(AC);
         T = P + t * ut;
         double d = CANONICAL_CENTER.sqrtDistance(T);
         double e = t - sqrt(1. - d);
         Point3D J = P + e * ut;
-        Vector3D Nj = Vector3D::vector_from_points(CANONICAL_CENTER, J).normalize();
+        Vector3D Nj = Vector3D::vector_from_points(CANONICAL_CENTER, J);
         J = _Md * J;
-        ray_out = Ray3D{J, (_Mn * Vector3D::VctTransmitted(-ut, Nj, indice / 1.)).normalize()};
+        ray_out = Ray3D{J, (_Mn * Vector3D::VctTransmitted(-ut, Nj, indice / 1.))};
     }
-    N = (_Mn * N).normalize();
+    N = _Mn * N;
     P = _Md * P;
     return true;
 }
