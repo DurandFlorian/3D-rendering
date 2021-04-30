@@ -2,7 +2,7 @@
 #include <math.h>
 #include "GlutLibrary3D.hpp"
 #include <GL/freeglut.h>
-#include "Circle3D.hpp"
+#include "Sphere3D.hpp"
 
 Camera3D::Camera3D(const Point3D &T, double alpha, double beta, double focal, double distance)
 {

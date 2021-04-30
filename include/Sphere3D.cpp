@@ -1,13 +1,13 @@
-#include "Circle3D.hpp"
+#include "Sphere3D.hpp"
 #include "Ray3D.hpp"
 #include <GL/freeglut.h>
 #include <math.h>
 
-Circle3D::Circle3D(Color color, double diffusion, double spec, double shine, double alpha) : Shape3D(color, diffusion, spec, shine, alpha)
+Sphere3D::Sphere3D(Color color, double diffusion, double spec, double shine, double alpha) : Shape3D(color, diffusion, spec, shine, alpha)
 {
 }
 
-bool Circle3D::intersect(Ray3D &ray, Point3D &P, Vector3D &N, Ray3D &ray_out) const
+bool Sphere3D::intersect(Ray3D &ray, Point3D &P, Vector3D &N, Ray3D &ray_out) const
 {
 
     Point3D A = _Mi * ray.get_A();

@@ -17,7 +17,7 @@ void glut3DInit(int argc, char **argv, int WWIDTH, int WHEIGHT, int SWIDTH, int 
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize(WWIDTH, WHEIGHT);
     glutInitWindowPosition((SWIDTH - WWIDTH) / 2, (SHEIGHT - WHEIGHT) / 2);
-    glutCreateWindow("Glut 3D");
+    glutCreateWindow("Ray tracing");
     glClearColor(0, 0, 0, 1);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();

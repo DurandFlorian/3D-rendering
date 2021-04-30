@@ -1,4 +1,4 @@
-#include "Square3D.hpp"
+#include "Cube3D.hpp"
 #include "Ray3D.hpp"
 #include <GL/freeglut.h>
 #include <math.h>
@@ -38,7 +38,7 @@ bool Square3D::intersect(Ray3D &ray, Point3D &P, Vector3D &N, Ray3D &ray_out) co
         }
         double t = ps1 / ps2;
         P = A + t * u;
-        if (std::max({fabs(P.x()), fabs(P.y()), fabs(P.z())}) > 1.01) //problème de coordonnées double
+        if (std::max({fabs(P.x()), fabs(P.y()), fabs(P.z())}) > 1.00000001) //problème de coordonnées
         {
             continue;
         }
@@ -57,7 +57,7 @@ bool Square3D::intersect(Ray3D &ray, Point3D &P, Vector3D &N, Ray3D &ray_out) co
                 }
                 double t = ps1 / ps2;
                 Point3D J = P + t * ut;
-                if (std::max({fabs(J.x()), fabs(J.y()), fabs(J.z())}) > 1.01) //problème de coordonnées double
+                if (std::max({fabs(J.x()), fabs(J.y()), fabs(J.z())}) > 1.00000001) //problème de coordonnées
                 {
                     continue;
                 }

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 2.9)
 
 project(syntheseImage)
 
@@ -8,15 +8,13 @@ else()
     add_compile_options(-std=c++17 -Wall -W -Werror -DNDEBUG )
 endif()
 
-list(APPEND CMAKE_PREFIX_PATH C:/Users/flori/freeglut)
-
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
 
 include_directories(${OPENGL_INCLUDE_DIRS} ${GLUT_INCLUDE_DIR})
 
 set(executables
-CameraIntersectObjects3D
+RayTracing
 )
 
 set(INCLUDE_DIR include)
@@ -38,10 +36,10 @@ foreach(executable ${executables})
         ${INCLUDE_DIR}/Matrix3D.cpp
         ${INCLUDE_DIR}/Ray3D.cpp
         ${INCLUDE_DIR}/Ray3D.hpp
-        ${INCLUDE_DIR}/Circle3D.hpp
-        ${INCLUDE_DIR}/Circle3D.cpp
-        ${INCLUDE_DIR}/Square3D.hpp
-        ${INCLUDE_DIR}/Square3D.cpp
+        ${INCLUDE_DIR}/Sphere3D.hpp
+        ${INCLUDE_DIR}/Sphere3D.cpp
+        ${INCLUDE_DIR}/Cube3D.hpp
+        ${INCLUDE_DIR}/Cube3D.cpp
         ${INCLUDE_DIR}/Camera3D.hpp
         ${INCLUDE_DIR}/Camera3D.cpp
         ${INCLUDE_DIR}/GlutLibrary3D.hpp
